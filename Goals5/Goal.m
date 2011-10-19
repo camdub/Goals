@@ -22,17 +22,15 @@
 @dynamic timeFrame;
 
 
-+ (void)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active{
++ (void)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active {
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
     Goal * goal = [NSEntityDescription insertNewObjectForEntityForName:@"Goal" inManagedObjectContext:context];
     goal.name = name;
     goal.pointValue = [[NSNumber alloc] initWithInt:pointValue];
-    //goal.active = true;
-    //goal.active = [values valueForKey:@"active"];
-    //goal.pointValue = [values valueForKey:@"pointValue"];
-    //goal.name = [values valueForKey:@"name"];
-    //goal.timeFrame = [values objectForKey:@"timeFrame"];
+    goal.timeFrame = timeFrame;
+    goal.active = [[NSNumber alloc] initWithBool:active];
     
     NSError *error;
     if (![context save:&error]) {
@@ -41,6 +39,7 @@
         NSLog(@"Context was saved");
     }
     NSLog(@"I Work!");
+    
     
 }
 

@@ -19,15 +19,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*
+    
     //NSDictionary values = [NSDictionary dictionaryWithObjectsAndKeys: true, @"active", 1, @"pointValue", @"eat slugs", @"name",nil];
+    [self loadData];
     
     TimeFrame * timeFrame = [NSEntityDescription
                            insertNewObjectForEntityForName:@"TimeFrame" 
-                           inManagedObjectContext:context];
+                           inManagedObjectContext:[self managedObjectContext]];
     
     [Goal createWithName:@"Test" timeFrame:timeFrame pointValue:1 active:YES];
-     */
     return YES;
 }
 
@@ -65,6 +65,22 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (void) loadData {
+    
+    // load some default timeFrames
+    NSError *error;
+    NSArray *fetchedObjects = [__managedObjectContext executeFetchRequest:[__managedObjectModel 
+                                                                           fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];    
+    if(fetchedObjects.count == 0) {
+        [TimeFrame initWithName:@"Weekly"];
+        [TimeFrame initWithName:@"Daily"];
+        [TimeFrame initWithName:@"Monthly"];
+        [TimeFrame initWithName:@"Quarterly"];
+        [TimeFrame initWithName:@"Annually"];
+    }
+
 }
 
 - (void)saveContext

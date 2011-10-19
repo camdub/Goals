@@ -7,7 +7,12 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "AppDelegate.h"
 
-@interface Goals5Tests : SenTestCase
+@interface Goals5Tests : SenTestCase {
+    
+    AppDelegate *appDelegate;
+}
+
 
 @end

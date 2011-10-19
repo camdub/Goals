@@ -24,4 +24,6 @@
 - (void)addGoals:(NSSet *)values;
 - (void)removeGoals:(NSSet *)values;
 
++ (TimeFrame *)initWithName:(NSString *)name;
+
 @end
