@@ -7,9 +7,12 @@
 //
 
 #import "ProgressTableViewController.h"
-
+#import "Group.h"
 
 @implementation ProgressTableViewController
+
+@synthesize groups;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +35,8 @@
 
 - (void)viewDidLoad
 {
+    
+    self.groups = [Group groups];
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -75,24 +80,23 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.groups.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ProgressListItem";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -100,7 +104,8 @@
     }
     
     // Configure the cell...
-    
+    cell.textLabel.text = [[self.groups objectAtIndex:[indexPath row]] name ];
+    cell. detailTextLabel.text = @"HOLLA!";
     return cell;
 }
 
@@ -142,7 +147,6 @@
     return YES;
 }
 */
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,5 +159,6 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
 
 @end

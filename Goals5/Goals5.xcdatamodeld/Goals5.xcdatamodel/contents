@@ -22,6 +22,7 @@
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="timeFrame" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <fetchRequest name="Goal_all" entity="Goal"/>
+    <fetchRequest name="Group_all" entity="Group"/>
     <fetchRequest name="TimeFrame_all" entity="TimeFrame"/>
     <fetchRequest name="TimeFrame_find_by_name" entity="TimeFrame" predicateString="name == $NAME"/>
     <elements>

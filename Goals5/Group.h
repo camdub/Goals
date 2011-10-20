@@ -23,4 +23,7 @@
 - (void)addGoals:(NSSet *)values;
 - (void)removeGoals:(NSSet *)values;
 
++ (Group *)initWithName:(NSString *)name;
++ (NSArray *)groups;
+
 @end

@@ -14,16 +14,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProgressListItem" id="2y6-HB-xlS" customClass="ProgressTableViewCellController">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProgressListItem" textLabel="75H-iD-M7w" style="IBUITableViewCellStyleDefault" id="2y6-HB-xlS">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="75H-iD-M7w">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="Viw-ns-DaR" kind="push" id="qLn-zY-c83"/>
+                                    <segue destination="Viw-ns-DaR" kind="push" id="luD-LH-5sc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -32,7 +41,7 @@
                             <outlet property="delegate" destination="9rg-pz-1wN" id="l3O-SL-hMR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="O8o-qO-adG"/>
+                    <navigationItem key="navigationItem" title="Progress" id="O8o-qO-adG"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1572" y="861"/>
@@ -58,12 +67,21 @@
                     <view key="view" contentMode="scaleToFill" id="YgG-pm-4Ca">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Rock that Progress Here!" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cGh-lK-yk2">
+                                <rect key="frame" x="64" y="173" width="192" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="tTI-wr-llV"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2129" y="848"/>
+            <point key="canvasLocation" x="2126" y="861"/>
         </scene>
         <scene sceneID="HAy-o1-wiF">
             <objects>
@@ -293,7 +311,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="T8g-JZ-sMl">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupsCell" id="T8g-JZ-sMl">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -308,7 +326,9 @@
                             <outlet property="delegate" destination="fxS-13-qTZ" id="SFy-fg-top"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6JU-k5-87U"/>
+                    <navigationItem key="navigationItem" title="Groups" id="6JU-k5-87U">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Yr5-Fy-B1i"/>
+                    </navigationItem>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="3205" y="-447"/>
@@ -406,9 +426,6 @@
         </class>
         <class className="ProgressDetailController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgressDetailController.h"/>
-        </class>
-        <class className="ProgressTableViewCellController" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgressTableViewCellController.h"/>
         </class>
         <class className="ProgressTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgressTableViewController.h"/>

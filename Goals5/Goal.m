@@ -36,9 +36,8 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
-        NSLog(@"Context was saved");
+        
     }
-    NSLog(@"I Work!");
     
     
 }

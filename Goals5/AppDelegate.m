@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Goal.h"
 #import "TimeFrame.h"
+#import "Group.h"
 
 @implementation AppDelegate
 
@@ -66,17 +67,24 @@
     NSUInteger timeFrameCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];
     
     if(timeFrameCount == 0) {
-        NSLog(@"Adding TimeFrames");
         [TimeFrame initWithName:@"Weekly"];
         [TimeFrame initWithName:@"Daily"];
         [TimeFrame initWithName:@"Monthly"];
         [TimeFrame initWithName:@"Quarterly"];
         [TimeFrame initWithName:@"Annually"];
     }
+    //Default groups - user can delete them if they want to
+    NSUInteger groupCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Group_all"] error:&error];
+    if(groupCount < 1) {
+        [Group initWithName:@"All"];
+        [Group initWithName:@"Family Life"];
+        [Group initWithName:@"Career Development"];
+        [Group initWithName:@"Spiritual"];
+    }
     //----DEMO DATA
-    NSUInteger goalsCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Goal_all"] error:&error];
+    NSUInteger goalCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Goal_all"] error:&error];
     
-    if(goalsCount < 10) {
+    if(goalCount < 10) {
         //Active 1
         [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES ];
         [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES ];
