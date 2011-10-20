@@ -21,6 +21,7 @@
 {
     
     //NSDictionary values = [NSDictionary dictionaryWithObjectsAndKeys: true, @"active", 1, @"pointValue", @"eat slugs", @"name",nil];
+    [__managedObjectContext reset];
     [self loadData];
     
     TimeFrame * timeFrame = [NSEntityDescription
@@ -79,6 +80,7 @@
         [TimeFrame initWithName:@"Monthly"];
         [TimeFrame initWithName:@"Quarterly"];
         [TimeFrame initWithName:@"Annually"];
+        NSLog(@"Adding Data");
     }
 
 }

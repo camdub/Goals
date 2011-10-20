@@ -7,6 +7,7 @@
 //
 
 #import "GoalsEditViewController.h"
+#import "TimeFrame.h"
 
 
 @implementation GoalsEditViewController
@@ -144,43 +145,45 @@
     //textField.delegate= self;
     //textField.inputView = datePicker;
 }
-     - (IBAction)displayPickerSheet {
-         pickerSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                   delegate:nil
-                                          cancelButtonTitle:nil
-                                     destructiveButtonTitle:nil
-                                          otherButtonTitles:nil];
-         
-         [pickerSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
-         
-         // NEEDSWORK: display picker properly in landscape mode
-         //CGRect pickerFrame = PICKER_FRAME;
-         CGRect pickerFrame = CGRectMake(0, 40, 0, 0);
-         
-         pickerView = [[UIPickerView alloc] initWithFrame:pickerFrame];
-         pickerView.showsSelectionIndicator = YES;
-         pickerView.dataSource = self;
-         pickerView.delegate = self;
-         
-         [pickerView selectRow:1 inComponent:0 animated:NO];
-         
-         [pickerSheet addSubview:pickerView];
-         
-         UISegmentedControl *closeButton = [[UISegmentedControl alloc]
-                                            initWithItems:[NSArray
-                                                           arrayWithObject:@"Done"]];
-         
-         closeButton.momentary = YES;
-         closeButton.frame = CGRectMake(260, 7, 50, 30);
-         closeButton.segmentedControlStyle = UISegmentedControlStyleBar;
-         closeButton.tintColor = [UIColor colorWithRed:0.3 green:0.3 blue:1.0 alpha:1.0];
-         [closeButton addTarget:self action:@selector(dismissPickerSheet:) forControlEvents:UIControlEventValueChanged];
-         [pickerSheet addSubview:closeButton];
-         
-         [pickerSheet showInView:[[UIApplication sharedApplication] keyWindow]];
-         
-         [pickerSheet setBounds:CGRectMake(0, 0, 320, 485)];
-     }    
+
+- (IBAction)displayPickerSheet {
+    
+    pickerSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                             destructiveButtonTitle:nil
+                                  otherButtonTitles:nil];
+ 
+    [pickerSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+ 
+     // NEEDSWORK: display picker properly in landscape mode
+     //CGRect pickerFrame = PICKER_FRAME;
+     CGRect pickerFrame = CGRectMake(0, 40, 0, 0);
+     
+     pickerView = [[UIPickerView alloc] initWithFrame:pickerFrame];
+     pickerView.showsSelectionIndicator = YES;
+     pickerView.dataSource = self;
+     pickerView.delegate = self;
+     
+     [pickerView selectRow:1 inComponent:0 animated:NO];
+     
+     [pickerSheet addSubview:pickerView];
+     
+     UISegmentedControl *closeButton = [[UISegmentedControl alloc]
+                                        initWithItems:[NSArray
+                                                       arrayWithObject:@"Done"]];
+     
+     closeButton.momentary = YES;
+     closeButton.frame = CGRectMake(260, 7, 50, 30);
+     closeButton.segmentedControlStyle = UISegmentedControlStyleBar;
+     closeButton.tintColor = [UIColor colorWithRed:0.3 green:0.3 blue:1.0 alpha:1.0];
+     [closeButton addTarget:self action:@selector(dismissPickerSheet:) forControlEvents:UIControlEventValueChanged];
+     [pickerSheet addSubview:closeButton];
+     
+     [pickerSheet showInView:[[UIApplication sharedApplication] keyWindow]];
+     
+     [pickerSheet setBounds:CGRectMake(0, 0, 320, 485)];
+}    
 #pragma mark - Picker data source
      - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
          return 1;
@@ -193,13 +196,13 @@
 #endif
          
          //return [[barnyard animalTypes] count];
-         return 5;
+         return [TimeFrame count] - 1;
      }
      
 #pragma mark - Picker delegate
      - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-         //return [barnyard displayNameForType:row];
-         return @"Test";
+         
+         return [[TimeFrame objectAtIndex:row] name];
      }
      
      - (void)dismissPickerSheet:(id)sender {

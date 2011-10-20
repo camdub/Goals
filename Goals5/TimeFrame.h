@@ -11,7 +11,7 @@
 
 @class Goal;
 
-@interface TimeFrame : NSManagedObject
+@interface TimeFrame : NSManagedObject     
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *goals;
@@ -25,5 +25,7 @@
 - (void)removeGoals:(NSSet *)values;
 
 + (TimeFrame *)initWithName:(NSString *)name;
++ (TimeFrame *)objectAtIndex:(NSInteger)index;
++ (NSUInteger)count;
 
 @end
