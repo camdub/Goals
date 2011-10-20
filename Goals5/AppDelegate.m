@@ -19,15 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    //NSDictionary values = [NSDictionary dictionaryWithObjectsAndKeys: true, @"active", 1, @"pointValue", @"eat slugs", @"name",nil];
     [self loadData];
-    
-    TimeFrame * timeFrame = [NSEntityDescription
-                           insertNewObjectForEntityForName:@"TimeFrame" 
-                           inManagedObjectContext:[self managedObjectContext]];
-    
-    [Goal createWithName:@"Test" timeFrame:timeFrame pointValue:1 active:YES];
     return YES;
 }
 
@@ -71,16 +63,57 @@
     
     // load some default timeFrames
     NSError *error;
-    NSArray *fetchedObjects = [__managedObjectContext executeFetchRequest:[__managedObjectModel 
-                                                                           fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];    
-    if(fetchedObjects.count == 0) {
+    NSUInteger timeFrameCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];
+    
+    if(timeFrameCount == 0) {
+        NSLog(@"Adding TimeFrames");
         [TimeFrame initWithName:@"Weekly"];
         [TimeFrame initWithName:@"Daily"];
         [TimeFrame initWithName:@"Monthly"];
         [TimeFrame initWithName:@"Quarterly"];
         [TimeFrame initWithName:@"Annually"];
     }
-
+    //----DEMO DATA
+    NSUInteger goalsCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Goal_all"] error:&error];
+    
+    if(goalsCount < 10) {
+        //Active 1
+        [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES ];
+        [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES ];
+        [Goal createWithName:@"Monthly Active 1 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:YES ];
+        [Goal createWithName:@"Quarterly Active 1 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:YES ];
+        [Goal createWithName:@"Annually Active 1 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:YES ];
+        //Active 2
+        [Goal createWithName:@"Daily Active 2 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:2 active:YES ];
+        [Goal createWithName:@"Weekly Active 2 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:2 active:YES ];
+        [Goal createWithName:@"Monthly Active 2 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:2 active:YES ];
+        [Goal createWithName:@"Quarterly Active 2 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:2 active:YES ];
+        [Goal createWithName:@"Annually Active 2 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:2 active:YES ];
+        //Active 3
+        [Goal createWithName:@"Daily Active 3 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:3 active:YES ];
+        [Goal createWithName:@"Weekly Active 3 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:3 active:YES ];
+        [Goal createWithName:@"Monthly Active 3 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:3 active:YES ];
+        [Goal createWithName:@"Quarterly Active 3 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:3 active:YES ];
+        [Goal createWithName:@"Annually Active 3 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:3 active:YES ];
+        //Active 4
+        [Goal createWithName:@"Daily Active 4 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:4 active:YES ];
+        [Goal createWithName:@"Weekly Active 4 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:4 active:YES ];
+        [Goal createWithName:@"Monthly Active 4 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:4 active:YES ];
+        [Goal createWithName:@"Quarterly Active 4 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:4 active:YES ];
+        [Goal createWithName:@"Annually Active 4 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:4 active:YES ];
+        //Inactive 1
+        [Goal createWithName:@"Daily Inactive 1 Point"      timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:NO ];
+        [Goal createWithName:@"Weekly Inactive 1 Point"     timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:NO ];
+        [Goal createWithName:@"Monthly Inactive 1 Point"    timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:NO ];
+        [Goal createWithName:@"Quarterly Inactive 1 Point"  timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:NO ];
+        [Goal createWithName:@"Annually Inactive 1 Point"   timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:NO ];
+        //Inactive 2
+        [Goal createWithName:@"Daily Inactive 2 Point"      timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:2 active:NO ];
+        [Goal createWithName:@"Weekly Inactive 2 Point"     timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:2 active:NO ];
+        [Goal createWithName:@"Monthly Inactive 2 Point"    timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:2 active:NO ];
+        [Goal createWithName:@"Quarterly Inactive 2 Point"  timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:2 active:NO ];
+        [Goal createWithName:@"Annually Inactive 2 Point"   timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:2 active:NO ];
+    }
 }
 
 - (void)saveContext

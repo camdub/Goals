@@ -23,6 +23,7 @@
     </entity>
     <fetchRequest name="Goal_all" entity="Goal"/>
     <fetchRequest name="TimeFrame_all" entity="TimeFrame"/>
+    <fetchRequest name="TimeFrame_find_by_name" entity="TimeFrame" predicateString="name == $NAME"/>
     <elements>
         <element name="Completion" positionX="241" positionY="252" width="128" height="75"/>
         <element name="Goal" positionX="252" positionY="-24" width="128" height="150"/>
