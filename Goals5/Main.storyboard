@@ -269,7 +269,7 @@
                                 <action selector="cancel:" destination="5KV-VH-x3k" id="vG3-MF-o93"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="QUi-hP-eYd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="QUi-hP-eYd">
                             <connections>
                                 <action selector="done:" destination="5KV-VH-x3k" id="WZN-SG-PYV"/>
                             </connections>
