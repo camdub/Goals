@@ -35,7 +35,6 @@
 
 - (void)viewDidLoad
 {
-    
     self.groups = [Group groups];
     [super viewDidLoad];
 
@@ -104,8 +103,7 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = [[self.groups objectAtIndex:[indexPath row]] name ];
-    cell. detailTextLabel.text = @"HOLLA!";
+    cell.textLabel.text = [[self.groups objectAtIndex:[indexPath row]] name];
     return cell;
 }
 

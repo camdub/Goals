@@ -37,9 +37,18 @@
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
         
+    }    
+}
++ (NSArray *)goals{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    // fetch to see if object exists
+    NSError * error = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:[[appDelegate managedObjectModel] fetchRequestTemplateForName:@"Goal_all"] error:&error];
+    if (fetchedObjects == nil) {
+        return NULL;
     }
-    
-    
+    return fetchedObjects;
 }
 
 @end
