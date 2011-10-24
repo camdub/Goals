@@ -9,6 +9,16 @@
 #import "ProgressDetailController.h"
 
 @implementation ProgressDetailController
+@synthesize dailyCompleteLabel;
+@synthesize dailyChangeLabel;
+@synthesize weeklyCompleteLabel;
+@synthesize weeklyChangeLabel;
+@synthesize monthlyCompleteLabel;
+@synthesize monthlyChangeLabel;
+@synthesize quarterlyCompleteLabel;
+@synthesize quarterlyChangeLabel;
+@synthesize annuallyCompleteLabel;
+@synthesize annuallyChangeLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +56,16 @@
 
 - (void)viewDidUnload
 {
+    [self setDailyCompleteLabel:nil];
+    [self setDailyChangeLabel:nil];
+    [self setWeeklyCompleteLabel:nil];
+    [self setWeeklyChangeLabel:nil];
+    [self setMonthlyCompleteLabel:nil];
+    [self setMonthlyChangeLabel:nil];
+    [self setQuarterlyCompleteLabel:nil];
+    [self setQuarterlyChangeLabel:nil];
+    [self setAnnuallyCompleteLabel:nil];
+    [self setAnnuallyChangeLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
