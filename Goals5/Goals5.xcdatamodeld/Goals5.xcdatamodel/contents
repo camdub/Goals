@@ -19,9 +19,12 @@
     </entity>
     <entity name="TimeFrame" representedClassName="TimeFrame" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="timeFrame" inverseEntity="Goal" syncable="YES"/>
     </entity>
+    <fetchRequest name="Completion_for_date_range" entity="Completion" predicateString="timestamp >= $START AND timestamp &lt;= $END"/>
     <fetchRequest name="Goal_all" entity="Goal"/>
+    <fetchRequest name="Goal_all_active" entity="Goal" predicateString="active == 1"/>
     <fetchRequest name="Group_all" entity="Group"/>
     <fetchRequest name="TimeFrame_all" entity="TimeFrame"/>
     <fetchRequest name="TimeFrame_find_by_name" entity="TimeFrame" predicateString="name == $NAME"/>
@@ -29,6 +32,6 @@
         <element name="Completion" positionX="241" positionY="252" width="128" height="75"/>
         <element name="Goal" positionX="252" positionY="-24" width="128" height="150"/>
         <element name="Group" positionX="36" positionY="9" width="128" height="75"/>
-        <element name="TimeFrame" positionX="484" positionY="18" width="128" height="75"/>
+        <element name="TimeFrame" positionX="484" positionY="18" width="128" height="90"/>
     </elements>
 </model>

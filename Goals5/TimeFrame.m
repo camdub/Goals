@@ -13,15 +13,17 @@
 @implementation TimeFrame
 
 @dynamic name;
+@dynamic weight;
 @dynamic goals;
 
-+ (TimeFrame *)initWithName:(NSString *)name {
++ (TimeFrame *)initWithName:(NSString *)name weight:(NSNumber *)weight {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
     TimeFrame * timeFrame = [NSEntityDescription insertNewObjectForEntityForName:@"TimeFrame" inManagedObjectContext:context];
     timeFrame.name = name;
+    timeFrame.weight = weight;
     
     NSError *error;
     if (![context save:&error]) {
@@ -33,7 +35,7 @@
 }
 + (TimeFrame *)findByName:(NSString *)name{
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSDictionary *subVars=[NSDictionary dictionaryWithObject:@"Weekly" forKey:@"NAME"];
+    NSDictionary *subVars=[NSDictionary dictionaryWithObject:name forKey:@"NAME"];
     NSFetchRequest *fetchRequest =   [appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"TimeFrame_find_by_name" substitutionVariables:subVars];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimeFrame" inManagedObjectContext:appDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
