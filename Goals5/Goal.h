@@ -35,7 +35,7 @@
 - (void)addGroups:(NSSet *)values;
 - (void)removeGroups:(NSSet *)values;
 
-+ (void)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active;
++ (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active;
 + (NSArray *)goals;
 
 @end

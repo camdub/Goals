@@ -22,7 +22,7 @@
 @dynamic timeFrame;
 
 
-+ (void)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active {
++ (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active {
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
@@ -37,7 +37,8 @@
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
         
-    }    
+    }
+    return goal;
 }
 + (NSArray *)goals{
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
