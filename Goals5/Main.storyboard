@@ -67,7 +67,7 @@
                     <navigationItem key="navigationItem" id="C1T-Rj-bgZ">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="S7y-VI-N9E">
                             <connections>
-                                <segue destination="bOy-Nt-4DC" kind="modal" id="QTC-Qs-FCI"/>
+                                <segue destination="bOy-Nt-4DC" kind="modal" modalTransitionStyle="flipHorizontal" id="QTC-Qs-FCI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -280,8 +280,12 @@
                     <navigationItem key="navigationItem" id="tTI-wr-llV"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activeEndDate" destination="qXZ-zG-bfd" id="mK9-ss-eOl"/>
+                        <outlet property="activeStartDate" destination="cGh-lK-yk2" id="U7i-qe-8ih"/>
                         <outlet property="annuallyChangeLabel" destination="Lod-0a-ZEU" id="ZWL-U5-eDU"/>
                         <outlet property="annuallyCompleteLabel" destination="Tx8-V4-2wg" id="gyM-L1-oNl"/>
+                        <outlet property="comparisonEndDate" destination="rAs-dK-uBT" id="TCM-rV-2tO"/>
+                        <outlet property="comparisonStartDate" destination="59g-NW-U1h" id="psA-Xo-Prz"/>
                         <outlet property="dailyChangeLabel" destination="9sl-dk-Ft3" id="Mem-hm-XSt"/>
                         <outlet property="dailyCompleteLabel" destination="h66-tD-nBK" id="pY3-2z-l38"/>
                         <outlet property="monthlyChangeLabel" destination="NK2-3w-0An" id="lLe-D5-thT"/>
@@ -671,8 +675,12 @@
         <class className="ProgressDetailController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProgressDetailController.h"/>
             <relationships>
+                <relationship kind="outlet" name="activeEndDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="activeStartDate" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="annuallyChangeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="annuallyCompleteLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="comparisonEndDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="comparisonStartDate" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dailyChangeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dailyCompleteLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="monthlyChangeLabel" candidateClass="UILabel"/>
@@ -693,6 +701,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pEa-hI-mtm"/>
+        <segue reference="QTC-Qs-FCI"/>
     </inferredMetricsTieBreakers>
 </document>
