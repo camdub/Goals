@@ -6,7 +6,9 @@
 //  Copyright (c) 2011 Calmes Apps. All rights reserved.
 //
 
+
 #import "ProgressTableViewController.h"
+#import "ProgressDetailController.h"
 #import "Group.h"
 
 @implementation ProgressTableViewController
@@ -156,6 +158,15 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"ProgressDetailControllerSegue"]){
+        ProgressDetailController * receivingController = (ProgressDetailController *)[segue destinationViewController];
+        // get the selected index
+        NSInteger selectedIndex = [[self.tableView indexPathForSelectedRow] row];
+        receivingController.title = [[groups objectAtIndex:selectedIndex] name];
+    }
 }
 
 
