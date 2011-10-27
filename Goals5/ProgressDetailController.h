@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ProgressDetailController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UILabel *activeStartDate;
+@property (weak, nonatomic) IBOutlet UILabel *activeEndDate;
+@property (weak, nonatomic) IBOutlet UILabel *comparisonStartDate;
+@property (weak, nonatomic) IBOutlet UILabel *comparisonEndDate;
+
 @property (weak, nonatomic) IBOutlet UILabel *dailyCompleteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dailyChangeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weeklyCompleteLabel;

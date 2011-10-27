@@ -16,4 +16,10 @@
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) Goal *goal;
 
++ (void)initForGoal:(Goal *)goal withTimestamp:(NSDate *)date;
++ (void)initForGoal:(Goal *)goal;
+
++ (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
+
+
 @end
