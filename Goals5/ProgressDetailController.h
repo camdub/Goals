@@ -7,13 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Group.h"
+#import "ProgressRangeController.h"
 
-@interface ProgressDetailController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *activeStartDate;
-@property (weak, nonatomic) IBOutlet UILabel *activeEndDate;
-@property (weak, nonatomic) IBOutlet UILabel *comparisonStartDate;
-@property (weak, nonatomic) IBOutlet UILabel *comparisonEndDate;
+@interface ProgressDetailController : UIViewController <ProgressRangeDelegate>{
+    Group * group;
+    NSDate * activeStartDate;
+    NSDate * activeEndDate;
+    NSDate * comparisonStartDate;
+    NSDate * comparisonEndDate;
+}
+
+@property(nonatomic, retain) Group * group;
+@property(nonatomic, retain) NSDate * activeStartDate;
+@property(nonatomic, retain) NSDate * activeEndDate;
+@property(nonatomic, retain) NSDate * comparisonStartDate;
+@property(nonatomic, retain) NSDate * comparisonEndDate;
+
+@property (weak, nonatomic) IBOutlet UILabel *activeStartDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *activeEndDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *comparisonStartDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *comparisonEndDateLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *dailyCompleteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dailyChangeLabel;

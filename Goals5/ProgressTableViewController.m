@@ -165,8 +165,9 @@
         ProgressDetailController * receivingController = (ProgressDetailController *)[segue destinationViewController];
         // get the selected index
         NSInteger selectedIndex = [[self.tableView indexPathForSelectedRow] row];
-        receivingController.title = [[groups objectAtIndex:selectedIndex] name];
-    }
+        receivingController.group = [groups objectAtIndex:selectedIndex];
+        receivingController.title = [receivingController.group name];
+     }
 }
 
 
