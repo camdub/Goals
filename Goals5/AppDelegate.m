@@ -10,6 +10,7 @@
 #import "Goal.h"
 #import "TimeFrame.h"
 #import "Group.h"
+#import "Completion.h"
 
 @implementation AppDelegate
 
@@ -67,11 +68,11 @@
     NSUInteger timeFrameCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];
     
     if(timeFrameCount == 0) {
-        [TimeFrame initWithName:@"Weekly"];
-        [TimeFrame initWithName:@"Daily"];
-        [TimeFrame initWithName:@"Monthly"];
-        [TimeFrame initWithName:@"Quarterly"];
-        [TimeFrame initWithName:@"Annually"];
+        [TimeFrame initWithName:@"Daily" weight:[NSNumber numberWithInt:365]];
+        [TimeFrame initWithName:@"Weekly" weight:[NSNumber numberWithInt:52]];
+        [TimeFrame initWithName:@"Monthly" weight:[NSNumber numberWithInt:12]];
+        [TimeFrame initWithName:@"Quarterly" weight:[NSNumber numberWithInt:4]];
+        [TimeFrame initWithName:@"Annually" weight:[NSNumber numberWithInt:1]];
     }
     //Default groups - user can delete them if they want to
     NSUInteger groupCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Group_all"] error:&error];
@@ -85,12 +86,40 @@
     NSUInteger goalCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Goal_all"] error:&error];
     
     if(goalCount < 10) {
+        Goal * goal1;
+        Goal * goal2;
+        Goal * goal3;
+        Goal * goal4;
+        Goal * goal5;
+        NSDate * baseTestDate = [NSDate dateWithTimeIntervalSince1970:1317427200];//Oct 1, 2011
+        NSTimeInterval day = 86400;
+        //NSTimeInterval week = day * 7;
+        NSTimeInterval month = day * 32;
+        //NSTimeInterval year = day * 365;
+        
+        
         //Active 1
-        [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES ];
-        [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES ];
-        [Goal createWithName:@"Monthly Active 1 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:YES ];
-        [Goal createWithName:@"Quarterly Active 1 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:YES ];
-        [Goal createWithName:@"Annually Active 1 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:YES ];
+        goal1 = [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES ];
+        goal2 = [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES ];
+        goal3 = [Goal createWithName:@"Monthly Active 1 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:YES ];
+        goal4 = [Goal createWithName:@"Quarterly Active 1 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:YES ];
+        goal5 = [Goal createWithName:@"Annually Active 1 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:YES ];
+        //Add some completion data for these goals
+        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*1 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*2 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*4 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*5 sinceDate:baseTestDate]];
+        
+        [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*2 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*12 sinceDate:baseTestDate]];
+        
+        [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:month+day*6 sinceDate:baseTestDate]];
+        
+        
+        
+        
         //Active 2
         [Goal createWithName:@"Daily Active 2 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:2 active:YES ];
         [Goal createWithName:@"Weekly Active 2 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:2 active:YES ];
@@ -121,6 +150,8 @@
         [Goal createWithName:@"Monthly Inactive 2 Point"    timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:2 active:NO ];
         [Goal createWithName:@"Quarterly Inactive 2 Point"  timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:2 active:NO ];
         [Goal createWithName:@"Annually Inactive 2 Point"   timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:2 active:NO ];
+        
+        
     }
 }
 
