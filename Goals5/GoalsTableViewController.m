@@ -7,9 +7,12 @@
 //
 
 #import "GoalsTableViewController.h"
+#import "Goal.h"
 
-
+#warning This controller must implement the control segment... haha, that ought to be interesting
 @implementation GoalsTableViewController
+
+@synthesize goals;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +35,7 @@
 
 - (void)viewDidLoad
 {
+    self.goals = [Goal goals];
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -78,29 +82,29 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    #warning This method should have as many sections as groups and the goals should be broken into those groups
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    #warning the goals should be broken into those groups, maybe a dictionary would be more appropriate than an Array
+    return self.goals.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"GoalListItem";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+    #warning This method must implement the GoalsTableViewCellController for custom checkboxes that tie to completion
     // Configure the cell...
-    
+    cell.textLabel.text = [[self.goals objectAtIndex:[indexPath row]] name];
     return cell;
 }
 

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GoalsTableViewController : UITableViewController
+@interface GoalsTableViewController : UITableViewController{
+    NSArray * goals;
+}
+
+@property(nonatomic, retain) NSArray * goals;
 
 @end

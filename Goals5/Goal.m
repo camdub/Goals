@@ -22,7 +22,7 @@
 @dynamic timeFrame;
 
 
-+ (void)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active {
++ (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active {
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
@@ -36,11 +36,20 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     } else {
-        NSLog(@"Context was saved");
+        
     }
-    NSLog(@"I Work!");
-    
-    
+    return goal;
+}
++ (NSArray *)goals{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    // fetch to see if object exists
+    NSError * error = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:[[appDelegate managedObjectModel] fetchRequestTemplateForName:@"Goal_all"] error:&error];
+    if (fetchedObjects == nil) {
+        return NULL;
+    }
+    return fetchedObjects;
 }
 
 @end

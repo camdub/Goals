@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProgressTableViewController : UITableViewController
+@interface ProgressTableViewController : UITableViewController{
+    NSArray * groups;
+}
+
+@property(nonatomic, retain) NSArray * groups;
 
 @end
