@@ -26,6 +26,7 @@
     <fetchRequest name="Goal_all" entity="Goal"/>
     <fetchRequest name="Goal_all_active" entity="Goal" predicateString="active == 1"/>
     <fetchRequest name="Group_all" entity="Group"/>
+    <fetchRequest name="Group_find_by_name" entity="Group" predicateString="name == $NAME"/>
     <fetchRequest name="TimeFrame_all" entity="TimeFrame"/>
     <fetchRequest name="TimeFrame_find_by_name" entity="TimeFrame" predicateString="name == $NAME"/>
     <elements>
