@@ -8,14 +8,18 @@
 
 #import "GoalsEditViewController.h"
 #import "TimeFrame.h"
+#import "Goal.h"
 
 
 @implementation GoalsEditViewController
+
 @synthesize frequencyTextField;
-@synthesize pointValueLabel;
 @synthesize pointValueStepper;
+@synthesize nameTextField;
+@synthesize timeFrameTextField;
 @synthesize pickerSheet;
 @synthesize pickerView;
+@synthesize pointValueLabel;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -41,8 +45,8 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    timeFrames = [TimeFrame all]; // store an array of timeframes for convenience
+    timeFrameTextField.text = @"Daily"; // set default frequency to Daily
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -53,6 +57,8 @@
     [self setPointValueStepper:nil];
     [self setPointValueLabel:nil];
     [self setFrequencyTextField:nil];
+    [self setNameTextField:nil];
+    [self setTimeFrameTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -124,9 +130,37 @@
 }
 */
 
+#pragma mark - Action Methods
+
 - (IBAction)done:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
-    NSLog(@"DONE");
+    
+    // Only save the goal if it has a name.  Otherwise, show an alert.
+    if(nameTextField.text.length > 0) {
+        
+        // SAVE THIS GOAL
+        int selected = (int)[timeFrames indexOfObjectPassingTest:^(id tfobj, NSUInteger idx, BOOL *stop) {
+
+            return [[tfobj name] isEqualToString: timeFrameTextField.text];
+        }];
+
+        //NSLog([NSString stringWithFormat:@"The timeframe: %d",selected]);
+        [Goal createWithName:nameTextField.text 
+              timeFrame:[timeFrames objectAtIndex:selected] 
+              pointValue:[pointValueLabel.text intValue]  
+              active:YES];
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Error!" 
+                              message:@"You must enter a name for this goal!" 
+                              delegate:self 
+                              cancelButtonTitle:@"Fix it" 
+                              otherButtonTitles:nil];
+        [alert show];
+        NSLog(@"Must enter a name");
+    }
 }
 
 - (IBAction)cancel:(id)sender {
@@ -194,17 +228,20 @@
          //NSLog(@"barnyard: %@", barnyard);
          //NSLog(@"animalTypes: %@", [barnyard animalTypes]);
 #endif
-         
-         //return [[barnyard animalTypes] count];
-         return [TimeFrame count] - 1;
+         return [timeFrames count] - 1;
      }
      
 #pragma mark - Picker delegate
      - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-         
-         return [[TimeFrame objectAtIndex:row] name];
+
+         return [[timeFrames objectAtIndex:row] name];
      }
      
+     - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+         frequencyTextField.text = [[timeFrames objectAtIndex:row] name];
+     }
+
      - (void)dismissPickerSheet:(id)sender {
          /*if (currentAnimal != nil) {
              currentAnimal.type = [pickerView selectedRowInComponent:TYPE_COMPONENT];
@@ -213,7 +250,6 @@
          }
           */
          //frequencyTextField.text = [pickerView selectedRowInComponent:0];
-         frequencyTextField.text = @"Test";
          [pickerSheet dismissWithClickedButtonIndex:0 animated:YES];
      }
       
@@ -224,6 +260,7 @@
              [self displayPickerSheet];   
              return NO;
          }
+        
          return YES;
      }
      
