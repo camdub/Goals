@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Group.h"
 
 @class Goal;
 
@@ -19,7 +20,7 @@
 + (void)initForGoal:(Goal *)goal withTimestamp:(NSDate *)date;
 + (void)initForGoal:(Goal *)goal;
 
-+ (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate forGroup:(Group *)group;
 
 
 @end

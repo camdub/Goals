@@ -92,8 +92,9 @@
     [comparisonStartDateLabel setText:[dateFormatter stringFromDate:comparisonStartDate]];
     [comparisonEndDateLabel setText:[dateFormatter stringFromDate:comparisonEndDate]];
     
-    NSDictionary * activeStats = [Completion statisticsWithStartDate:activeStartDate EndDate:activeEndDate ];
-    NSDictionary * comparisonStats = [Completion statisticsWithStartDate:comparisonStartDate EndDate: comparisonEndDate];
+    NSLog(@"GROUP: %@", [group name]);
+    NSDictionary * activeStats = [Completion statisticsWithStartDate:activeStartDate EndDate:activeEndDate forGroup:group];
+    NSDictionary * comparisonStats = [Completion statisticsWithStartDate:comparisonStartDate EndDate: comparisonEndDate forGroup:group];
     
     
     NSArray * labels = [NSArray arrayWithObjects:
