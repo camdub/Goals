@@ -17,6 +17,7 @@
 @dynamic details;
 @dynamic name;
 @dynamic pointValue;
+@dynamic createdDate;
 @dynamic completions;
 @dynamic groups;
 @dynamic timeFrame;
@@ -40,6 +41,26 @@
     }
     return goal;
 }
++ (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active createdDate:(NSDate *)date{
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    Goal * goal = [NSEntityDescription insertNewObjectForEntityForName:@"Goal" inManagedObjectContext:context];
+    goal.name = name;
+    goal.pointValue = [[NSNumber alloc] initWithInt:pointValue];
+    goal.timeFrame = timeFrame;
+    goal.active = [[NSNumber alloc] initWithBool:active];
+    goal.createdDate = date;
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        
+    }
+    return goal;
+}
+
 + (NSArray *)goals{
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];

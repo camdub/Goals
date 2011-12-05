@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * details;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * pointValue;
+@property (nonatomic, retain) NSDate * createdDate;
 @property (nonatomic, retain) NSSet *completions;
 @property (nonatomic, retain) NSSet *groups;
 @property (nonatomic, retain) NSManagedObject *timeFrame;
@@ -36,6 +37,7 @@
 - (void)removeGroups:(NSSet *)values;
 
 + (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active;
++ (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active createdDate:(NSDate *)date;
 + (NSArray *)goals;
 
 @end
