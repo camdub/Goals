@@ -7,12 +7,15 @@
 //
 
 #import "GoalsTableViewController.h"
+#import "GoalsTableViewCellController.h"
+
 #import "Goal.h"
 
 #warning This controller must implement the control segment... haha, that ought to be interesting
 @implementation GoalsTableViewController
 
 @synthesize goals;
+@synthesize timeFrames;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -98,14 +101,25 @@
 {
     static NSString *CellIdentifier = @"GoalListItem";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GoalsTableViewCellController  *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[GoalsTableViewCellController alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     #warning This method must implement the GoalsTableViewCellController for custom checkboxes that tie to completion
     // Configure the cell...
-    cell.textLabel.text = [[self.goals objectAtIndex:[indexPath row]] name];
+    //cell.textLabel.text = ;
+    cell.nameLabel.text = [[self.goals objectAtIndex:[indexPath row]] name];
     return cell;
+}
+- (IBAction)checked:(id)sender {
+    UIButton * button = (UIButton *)sender;
+    UIImage * checked = [UIImage imageNamed:@"checked"];
+    UIImage * unchecked = [UIImage imageNamed:@"unchecked"];
+    if ([button imageForState:UIControlStateNormal] == checked) {
+        [button setImage:unchecked forState:UIControlStateNormal];
+    } else {
+        [button setImage:checked forState:UIControlStateNormal];
+    }
 }
 
 /*

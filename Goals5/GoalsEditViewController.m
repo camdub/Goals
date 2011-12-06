@@ -45,7 +45,7 @@
 {
     [super viewDidLoad];
 
-    timeFrames = [TimeFrame all]; // store an array of timeframes for convenience
+    //timeFrames = [TimeFrame all]; // store an array of timeframes for convenience
     timeFrameTextField.text = @"Daily"; // set default frequency to Daily
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.

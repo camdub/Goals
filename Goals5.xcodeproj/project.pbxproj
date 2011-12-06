@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8334CCE5148D626700F7532D /* progress_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8334CCE4148D626700F7532D /* progress_background.png */; };
+		8364E500148DA40900624DA5 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8364E4FE148DA40900624DA5 /* checked.png */; };
+		8364E501148DA40900624DA5 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8364E4FF148DA40900624DA5 /* unchecked.png */; };
 		8382E28F1459B2A900A6C8BA /* ProgressRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382E28E1459B2A900A6C8BA /* ProgressRangeController.m */; };
 		83E145F2144E435A00F6D219 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E145F1144E435A00F6D219 /* UIKit.framework */; };
 		83E145F4144E435A00F6D219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E145F3144E435A00F6D219 /* Foundation.framework */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		8334CCE4148D626700F7532D /* progress_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_background.png; sourceTree = "<group>"; };
+		8364E4FE148DA40900624DA5 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = ../checked.png; sourceTree = "<group>"; };
+		8364E4FF148DA40900624DA5 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = ../unchecked.png; sourceTree = "<group>"; };
 		8382E28D1459B2A900A6C8BA /* ProgressRangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressRangeController.h; sourceTree = "<group>"; };
 		8382E28E1459B2A900A6C8BA /* ProgressRangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressRangeController.m; sourceTree = "<group>"; };
 		83E145ED144E435A00F6D219 /* Goals5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals5.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +171,8 @@
 		83E145FA144E435B00F6D219 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8364E4FE148DA40900624DA5 /* checked.png */,
+				8364E4FF148DA40900624DA5 /* unchecked.png */,
 				8334CCE4148D626700F7532D /* progress_background.png */,
 				83E145FB144E435B00F6D219 /* Goals5-Info.plist */,
 				83E145FC144E435B00F6D219 /* InfoPlist.strings */,
@@ -316,6 +322,8 @@
 				83E145FE144E435B00F6D219 /* InfoPlist.strings in Resources */,
 				83E14636144E47D400F6D219 /* Main.storyboard in Resources */,
 				8334CCE5148D626700F7532D /* progress_background.png in Resources */,
+				8364E500148DA40900624DA5 /* checked.png in Resources */,
+				8364E501148DA40900624DA5 /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
