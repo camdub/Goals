@@ -22,5 +22,4 @@
 
 + (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate forGroup:(Group *)group;
 
-
 @end

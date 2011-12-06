@@ -11,7 +11,8 @@
 @interface GoalsTableViewCellController : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *checkImageView;
+@property (nonatomic, strong) IBOutlet UIButton *checkButton;
+
 
 
 @end

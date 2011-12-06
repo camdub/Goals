@@ -32,7 +32,6 @@ static int * count;
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         return nil;
     }
-    
     count++;
     return timeFrame;
 }
@@ -59,5 +58,28 @@ static int * count;
         return NULL;
     }
     return [fetchedObjects objectAtIndex:0];
+}
+
++ (NSArray *)activeTimeFrames{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    // fetch to see if object exists
+    NSError * error = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:[[appDelegate managedObjectModel] fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];
+    if (fetchedObjects == nil) {
+        return NULL;
+    }
+    NSMutableArray * timeFrames = [NSMutableArray arrayWithCapacity:1];
+    for (TimeFrame * timeFrame in fetchedObjects){
+        NSMutableSet * goals = [NSMutableSet setWithCapacity:0];
+        for (Goal * goal in timeFrame.goals) {
+            if ([goal.active boolValue] ) {
+                [goals addObject:goal];
+            }
+        }
+        timeFrame.goals = goals;
+        [timeFrames addObject: timeFrame];
+    }
+    return [NSArray arrayWithArray: timeFrames];
 }
 @end

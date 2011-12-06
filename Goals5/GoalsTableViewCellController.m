@@ -11,7 +11,7 @@
 @implementation GoalsTableViewCellController
 
 @synthesize nameLabel;
-@synthesize checkImageView;
+@synthesize checkButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

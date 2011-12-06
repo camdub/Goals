@@ -68,7 +68,7 @@
     NSArray * goals = (NSArray *)[group goals];
     
     for (Goal * goal in goals) {
-        if (!goal.active) {
+        if (![goal.active boolValue]) {
             continue;
         }    
         //Count the number of times the point value should be included for the given range

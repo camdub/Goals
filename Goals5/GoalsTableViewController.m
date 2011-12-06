@@ -8,10 +8,10 @@
 
 #import "GoalsTableViewController.h"
 #import "GoalsTableViewCellController.h"
-
+#import "AppDelegate.h"
 #import "Goal.h"
+#import "TimeFrame.h"
 
-#warning This controller must implement the control segment... haha, that ought to be interesting
 @implementation GoalsTableViewController
 
 @synthesize goals;
@@ -39,6 +39,8 @@
 - (void)viewDidLoad
 {
     self.goals = [Goal goals];
+    self.timeFrames = [TimeFrame activeTimeFrames];
+    
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -86,17 +88,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    #warning This method should have as many sections as groups and the goals should be broken into those groups
-    return 1;
+    return self.timeFrames.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    #warning the goals should be broken into those groups, maybe a dictionary would be more appropriate than an Array
-    return self.goals.count;
+    return [[[self.timeFrames objectAtIndex:section] goals] count];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return [[self.timeFrames objectAtIndex:section] name];
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"GoalListItem";
@@ -105,13 +108,15 @@
     if (cell == nil) {
         cell = [[GoalsTableViewCellController alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    #warning This method must implement the GoalsTableViewCellController for custom checkboxes that tie to completion
     // Configure the cell...
-    //cell.textLabel.text = ;
-    cell.nameLabel.text = [[self.goals objectAtIndex:[indexPath row]] name];
+    cell.nameLabel.text = [[[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]] name];
+#warning set the check according to the completion.  make a completion that searching according to the given date range and see if a completion for that time frame and that goal exists
+    //[[cell checkButton] setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
     return cell;
 }
 - (IBAction)checked:(id)sender {
+#warning find a way to identify the row that the button is on
+    
     UIButton * button = (UIButton *)sender;
     UIImage * checked = [UIImage imageNamed:@"checked"];
     UIImage * unchecked = [UIImage imageNamed:@"unchecked"];
