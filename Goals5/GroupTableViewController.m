@@ -78,8 +78,10 @@
     }
     
     // init the array for objects
-    NSUInteger c = [[_fetchedResultsController fetchedObjects] count];
-    self.selected = [[NSMutableArray alloc] initWithCapacity:c];
+    if(self.selected == nil){
+        NSUInteger c = [[_fetchedResultsController fetchedObjects] count];
+        self.selected = [[NSMutableArray alloc] initWithCapacity:c];
+    }
 }
 
 - (void)viewDidUnload
@@ -107,7 +109,7 @@
         NSLog(@"Selected group name: %@", group.name);
     }
     
-    [[self delegate] setSelectedGroups:[NSSet setWithArray:self.selected]];
+    [[self delegate] setSelectedGroups:self.selected];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -139,6 +141,10 @@
 - (void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Group * group = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    if([selected indexOfObject:group] != NSNotFound) // if the group is in the selected list, check it
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
     cell.textLabel.text = [NSString stringWithFormat:@"%@", group.name];
 }
 

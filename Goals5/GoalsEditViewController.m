@@ -152,7 +152,7 @@
               active:YES];
         
         if(groups != nil)
-            [goal addGroups:groups];
+            [goal addGroups:[NSSet setWithArray:groups]];
         
         [[self delegate] didCreateGoal]; // notify parent that a new goal was created
         
@@ -273,16 +273,19 @@
 
     - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
         
-        if([[segue identifier] isEqualToString:@"GroupChoiceSegue"]){
+        if([[segue identifier] isEqualToString:@"ChooseGroups"]){
             GroupTableViewController * receivingController = (GroupTableViewController *)[segue destinationViewController];
             receivingController.delegate = self;
+            if(groups != nil) {
+                receivingController.selected = groups;
+            }
         }
 
     }
 
-    - (void) setSelectedGroups:(NSSet *)group_set {
+    - (void) setSelectedGroups:(NSMutableArray *)group_set {
         
-        groups = [[NSSet alloc] initWithSet:group_set];
+        groups = group_set;
     }
      
 @end

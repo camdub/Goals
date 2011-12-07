@@ -11,18 +11,20 @@
 @protocol GroupSelectionDelegate;
 
 @protocol GroupSelectionDelegate <NSObject>
-    - (void) setSelectedGroups:(NSSet *)group_set;
+    - (void) setSelectedGroups:(NSMutableArray *)group_set;
 @end
 
 @interface GroupTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
     
     NSMutableArray * selected;
+    NSSet * currently_selected;
     NSFetchedResultsController * _fetchedResultsController;
 }
 
 @property (nonatomic, retain) NSFetchedResultsController * fetchedResultsController;
 @property (nonatomic, assign) id <GroupSelectionDelegate> delegate;
 @property (nonatomic, retain) NSMutableArray * selected;
+@property (nonatomic, retain) NSSet * currentlySelected;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 

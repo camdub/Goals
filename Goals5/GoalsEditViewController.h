@@ -19,7 +19,7 @@
     UILabel *pointValueLabel;
     
     NSArray *timeFrames;
-    NSSet * groups;
+    NSMutableArray * groups;
 }
 
 - (IBAction)done:(id)sender;
