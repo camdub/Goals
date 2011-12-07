@@ -75,7 +75,7 @@
     }
     return fetchedObjects;
 }
-- (BOOL)hasCompletionThisTimeFrame{
+- (Completion *)returnCurrentCompletion{
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     Goal * currentGoal = (Goal *)self;
     
@@ -83,7 +83,7 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* components = [calendar components:flags fromDate:[NSDate date]];
     NSDate* today = [calendar dateFromComponents:components];
-    
+    NSLog(@"The goal %@", [currentGoal name]);
     NSDateFormatter  * dateFormatter = [[NSDateFormatter new] init];
     NSString * timeFrameName = [(TimeFrame *)[currentGoal timeFrame] name];
     NSDate * startDate;
@@ -147,15 +147,32 @@
     NSError * error = nil;
     NSArray * fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil) {
-        return FALSE;
+        return nil;
     }
     NSSet * set = [NSSet setWithArray:fetchedObjects];
     for (Completion * completion in set) {
         if ([completion goal] == currentGoal) {
-            return YES;
+            return completion;
         }
     }
+    return nil;
+}
+- (BOOL)hasCurrentCompletion{
+    if ([self returnCurrentCompletion] != nil) {
+        return YES;
+    }
     return NO;
+}
+
+- (void)removeCurrentCompletion{
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    [context deleteObject:[self returnCurrentCompletion]];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 }
 
 
