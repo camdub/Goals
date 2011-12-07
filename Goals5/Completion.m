@@ -39,7 +39,7 @@
     
     Completion * completion = [NSEntityDescription insertNewObjectForEntityForName:@"Completion" inManagedObjectContext:context];
     completion.goal = goal;
-    completion.timestamp = [NSDate dateWithTimeIntervalSinceNow:0];
+    //completion.timestamp = [NSDate dateWithTimeIntervalSinceNow:0];
     
     NSError *error;
     if (![context save:&error]) {
@@ -47,6 +47,7 @@
     } else {
         
     }
+    NSLog(@"I jsut got saved as a completion with the following format: %@",[[completion timestamp] description]);
 }
 + (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate forGroup:(Group *)group{
     
@@ -166,7 +167,7 @@
                      ([[dateFormatter stringFromDate: tempStartDate] isEqualToString: @"7-01"] && [[dateFormatter stringFromDate: tempEndDate] isEqualToString: @"9-30"]) ||
                     ([[dateFormatter stringFromDate: tempStartDate] isEqualToString: @"10-01"] && [[dateFormatter stringFromDate: tempEndDate] isEqualToString: @"12-31"])){
                     countIt = YES;
-                }                
+                }
             } else if([timeFrameName isEqualToString: @"Annually"]){
                 [dateFormatter setDateFormat:@"MM-dd"];
                 if (([[dateFormatter stringFromDate: tempStartDate] isEqualToString: @"01-01"]) && ([[dateFormatter stringFromDate: tempEndDate] isEqualToString: @"12-31"])) {

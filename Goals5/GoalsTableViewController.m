@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "Goal.h"
 #import "TimeFrame.h"
+#import "Completion.h"
 
 @implementation GoalsTableViewController
 
@@ -109,13 +110,21 @@
         cell = [[GoalsTableViewCellController alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    cell.nameLabel.text = [[[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]] name];
-#warning set the check according to the completion.  make a completion that searching according to the given date range and see if a completion for that time frame and that goal exists
-    //[[cell checkButton] setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
+    Goal * goal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
+    NSLog(@"%@ Completions: %d",[goal name],[[goal completions] count]);
+    cell.nameLabel.text = [goal name];
+    if ([goal hasCompletionThisTimeFrame]) {
+        [[cell checkButton] setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
+    } else {
+        [[cell checkButton] setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
+    }
     return cell;
 }
 - (IBAction)checked:(id)sender {
-#warning find a way to identify the row that the button is on
+    UIView *senderButton = (UIView*) sender;
+    NSIndexPath *indexPath = [[self tableView] indexPathForCell: (UITableViewCell*)[[senderButton superview]superview]];
+    Goal * checkedGoal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
+    [Completion initForGoal:checkedGoal];
     
     UIButton * button = (UIButton *)sender;
     UIImage * checked = [UIImage imageNamed:@"checked"];
@@ -125,8 +134,11 @@
     } else {
         [button setImage:checked forState:UIControlStateNormal];
     }
-}
 
+}
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath { 
+    NSLog(@"Entered the accessory button tapped for row with indexpath method");
+} 
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

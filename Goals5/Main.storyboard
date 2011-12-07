@@ -571,7 +571,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CID-c9-VJT">
-                                            <rect key="frame" x="7" y="6" width="29" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <state key="normal" image="unchecked.png">
@@ -601,7 +601,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Goals" id="pQG-Vr-HNv"/>
+                    <navigationItem key="navigationItem" title="Goals" id="pQG-Vr-HNv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NtM-wa-A0X">
+                            <connections>
+                                <segue destination="bOy-Nt-4DC" kind="modal" id="JHn-my-mac"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
@@ -879,6 +885,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwi-mn-CrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="bOy-Nt-4DC" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="JXf-O9-RTz"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GVK-FX-8Ud">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -979,4 +986,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="JHn-my-mac"/>
+    </inferredMetricsTieBreakers>
 </document>
