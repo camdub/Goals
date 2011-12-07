@@ -83,14 +83,12 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* components = [calendar components:flags fromDate:[NSDate date]];
     NSDate* today = [calendar dateFromComponents:components];
-    NSLog(@"The goal %@", [currentGoal name]);
     NSDateFormatter  * dateFormatter = [[NSDateFormatter new] init];
     NSString * timeFrameName = [(TimeFrame *)[currentGoal timeFrame] name];
-    NSDate * startDate;
-    NSDate * endDate;
-    NSLog(@"Today: %@",[today description]);
-    startDate = today;
-    endDate = today;
+    
+    NSDate * startDate = today;
+    NSDate * endDate = today;
+    
     if ([timeFrameName isEqualToString: @"Daily"]) {
         
     } else if([timeFrameName isEqualToString: @"Weekly"]){

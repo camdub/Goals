@@ -60,6 +60,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[self tableView] reloadData];
     [super viewWillAppear:animated];
 }
 
@@ -111,7 +112,6 @@
     }
     // Configure the cell...
     Goal * goal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
-    NSLog(@"%@ Completions: %d",[goal name],[[goal completions] count]);
     cell.nameLabel.text = [goal name];
     if ([goal hasCurrentCompletion]) {
         [[cell checkButton] setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
