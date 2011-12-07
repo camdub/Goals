@@ -77,6 +77,7 @@
     //Default groups - user can delete them if they want to
     NSUInteger groupCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Group_all"] error:&error];
     if(groupCount < 1) {
+        [Group initWithName:@"All"];
         [Group initWithName:@"Family Life"];
         [Group initWithName:@"Career Development"];
         [Group initWithName:@"Spiritual"];
@@ -90,7 +91,8 @@
         Goal * goal3;
         Goal * goal4;
         Goal * goal5;
-        NSDate * baseTestDate = [NSDate dateWithTimeIntervalSince1970:1317427200];//Oct 1, 2011
+        //NSDate * baseTestDate = [NSDate dateWithTimeIntervalSince1970:1317427200];//Oct 1, 2011
+        NSDate * baseTestDate = [NSDate dateWithTimeIntervalSinceNow:0];//now!
         NSTimeInterval day = 86400;
         //NSTimeInterval week = day * 7;
         NSTimeInterval month = day * 32;
@@ -98,12 +100,12 @@
         
         
         //Active 1
-        /*goal1 = [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES ];
-        goal2 = [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES ];
-        goal3 = [Goal createWithName:@"Monthly Active 1 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:YES ];
-        goal4 = [Goal createWithName:@"Quarterly Active 1 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:YES ];
-        goal5 = [Goal createWithName:@"Annually Active 1 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:YES ];
-        //Add some completion data for these goals*/
+        goal1 = [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES createdDate:baseTestDate];
+        goal2 = [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES createdDate:baseTestDate];
+        goal3 = [Goal createWithName:@"Monthly Active 1 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:YES createdDate:baseTestDate];
+        goal4 = [Goal createWithName:@"Quarterly Active 1 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:YES createdDate:baseTestDate];
+        goal5 = [Goal createWithName:@"Annually Active 1 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:YES createdDate:baseTestDate];
+        //Add some completion data for these goals
         [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*1 sinceDate:baseTestDate]];
         [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*2 sinceDate:baseTestDate]];
         [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
@@ -113,11 +115,8 @@
         [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*2 sinceDate:baseTestDate]];
         [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*12 sinceDate:baseTestDate]];
         
-        [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
-        [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:month+day*6 sinceDate:baseTestDate]];
-        
-        
-        /*
+        [Completion initForGoal:goal3 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
+        [Completion initForGoal:goal3 withTimestamp:[NSDate dateWithTimeInterval:month+day*6 sinceDate:baseTestDate]];
         
         //Active 2
         [Goal createWithName:@"Daily Active 2 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:2 active:YES ];
@@ -149,8 +148,7 @@
         [Goal createWithName:@"Monthly Inactive 2 Point"    timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:2 active:NO ];
         [Goal createWithName:@"Quarterly Inactive 2 Point"  timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:2 active:NO ];
         [Goal createWithName:@"Annually Inactive 2 Point"   timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:2 active:NO ];
-        
-        */
+
     }
 }
 

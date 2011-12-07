@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Completion" representedClassName="Completion" syncable="YES">
-        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" defaultDateTimeInterval="344847600" defaultValueString="today" syncable="YES"/>
         <relationship name="goal" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="completions" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="createdDate" attributeType="Date" defaultDateTimeInterval="344847600" defaultValueString="today" syncable="YES"/>
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pointValue" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -23,14 +24,16 @@
         <relationship name="goals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="timeFrame" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <fetchRequest name="Completion_for_date_range" entity="Completion" predicateString="timestamp >= $START AND timestamp &lt;= $END"/>
+    <fetchRequest name="Completion_for_date_range_and_goal_id" entity="Completion" predicateString="goal_id == $GOALID AND timestamp >= $START AND timestamp >= $END"/>
     <fetchRequest name="Goal_all" entity="Goal"/>
     <fetchRequest name="Goal_all_active" entity="Goal" predicateString="active == 1"/>
     <fetchRequest name="Group_all" entity="Group"/>
+    <fetchRequest name="Group_find_by_name" entity="Group" predicateString="name == $NAME"/>
     <fetchRequest name="TimeFrame_all" entity="TimeFrame"/>
     <fetchRequest name="TimeFrame_find_by_name" entity="TimeFrame" predicateString="name == $NAME"/>
     <elements>
         <element name="Completion" positionX="241" positionY="252" width="128" height="75"/>
-        <element name="Goal" positionX="252" positionY="-24" width="128" height="150"/>
+        <element name="Goal" positionX="252" positionY="-24" width="128" height="165"/>
         <element name="Group" positionX="36" positionY="9" width="128" height="75"/>
         <element name="TimeFrame" positionX="484" positionY="18" width="128" height="90"/>
     </elements>

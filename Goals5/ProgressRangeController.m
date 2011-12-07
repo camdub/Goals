@@ -167,6 +167,9 @@
     [comparisonEndDateInput setText:[dateFormatter stringFromDate:comparisonEndDate]];
     //Sync date change back to the details view so when it views again it will reset data
     [delegate setActiveStartDate:activeStartDate ActiveEndDate:activeEndDate ComparisonStartDate:comparisonStartDate ActiveStartDate:comparisonEndDate];
+    
+    
+    //[NSDateComponents
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     activeTextField = textField;

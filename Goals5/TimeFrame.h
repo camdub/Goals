@@ -29,6 +29,5 @@
 + (NSUInteger)count;
 + (TimeFrame *)initWithName:(NSString *)name weight:(NSNumber *)weight;
 + (TimeFrame *)findByName:(NSString *)name;
-+ (NSArray *)all;
-
++ (NSArray *)activeTimeFrames;
 @end

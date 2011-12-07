@@ -39,5 +39,19 @@
     }
     return fetchedObjects;
 }
++ (Group *)findByName:(NSString *)name{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSDictionary *subVars = [NSDictionary dictionaryWithObject:name forKey:@"NAME"];
+    NSFetchRequest *fetchRequest = [appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"Group_find_by_name" substitutionVariables:subVars];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Group" inManagedObjectContext:appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError * error = nil;
+    NSArray * fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil) {
+        return NULL;
+    }
+    return [fetchedObjects objectAtIndex:0];
+}
 
 @end

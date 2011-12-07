@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8334CCE5148D626700F7532D /* progress_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8334CCE4148D626700F7532D /* progress_background.png */; };
+		8364E500148DA40900624DA5 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8364E4FE148DA40900624DA5 /* checked.png */; };
+		8364E501148DA40900624DA5 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8364E4FF148DA40900624DA5 /* unchecked.png */; };
+		8382E28F1459B2A900A6C8BA /* ProgressRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382E28E1459B2A900A6C8BA /* ProgressRangeController.m */; };
 		83E145F2144E435A00F6D219 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E145F1144E435A00F6D219 /* UIKit.framework */; };
 		83E145F4144E435A00F6D219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E145F3144E435A00F6D219 /* Foundation.framework */; };
 		83E145F6144E435A00F6D219 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E145F5144E435A00F6D219 /* CoreGraphics.framework */; };
@@ -33,9 +37,6 @@
 		83E1464B144E8EAC00F6D219 /* ProgressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1464A144E8EAC00F6D219 /* ProgressTableViewController.m */; };
 		83E1464E144E8F6F00F6D219 /* ProgressTableViewCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1464D144E8F6F00F6D219 /* ProgressTableViewCellController.m */; };
 		83E14654144F24C500F6D219 /* GoalsEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E14653144F24C500F6D219 /* GoalsEditViewController.m */; };
-		F00BB7161474D74800E1C3DB /* GoalsAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F00BB7151474D74800E1C3DB /* GoalsAddViewController.m */; };
-		F00BB71A1474D9A500E1C3DB /* GroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F00BB7191474D9A500E1C3DB /* GroupTableViewController.m */; };
-		F0518ED61460400C00B8804C /* ProgressRangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0518ED51460400C00B8804C /* ProgressRangeController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8334CCE4148D626700F7532D /* progress_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_background.png; sourceTree = "<group>"; };
+		8364E4FE148DA40900624DA5 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = ../checked.png; sourceTree = "<group>"; };
+		8364E4FF148DA40900624DA5 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = ../unchecked.png; sourceTree = "<group>"; };
+		8382E28D1459B2A900A6C8BA /* ProgressRangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressRangeController.h; sourceTree = "<group>"; };
+		8382E28E1459B2A900A6C8BA /* ProgressRangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressRangeController.m; sourceTree = "<group>"; };
 		83E145ED144E435A00F6D219 /* Goals5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E145F1144E435A00F6D219 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83E145F3144E435A00F6D219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -90,12 +96,6 @@
 		83E1464D144E8F6F00F6D219 /* ProgressTableViewCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTableViewCellController.m; sourceTree = "<group>"; };
 		83E14652144F24C400F6D219 /* GoalsEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalsEditViewController.h; sourceTree = "<group>"; };
 		83E14653144F24C500F6D219 /* GoalsEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalsEditViewController.m; sourceTree = "<group>"; };
-		F00BB7141474D74800E1C3DB /* GoalsAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalsAddViewController.h; sourceTree = "<group>"; };
-		F00BB7151474D74800E1C3DB /* GoalsAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalsAddViewController.m; sourceTree = "<group>"; };
-		F00BB7181474D9A500E1C3DB /* GroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewController.h; sourceTree = "<group>"; };
-		F00BB7191474D9A500E1C3DB /* GroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewController.m; sourceTree = "<group>"; };
-		F0518ED41460400C00B8804C /* ProgressRangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressRangeController.h; sourceTree = "<group>"; };
-		F0518ED51460400C00B8804C /* ProgressRangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressRangeController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +171,9 @@
 		83E145FA144E435B00F6D219 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8364E4FE148DA40900624DA5 /* checked.png */,
+				8364E4FF148DA40900624DA5 /* unchecked.png */,
+				8334CCE4148D626700F7532D /* progress_background.png */,
 				83E145FB144E435B00F6D219 /* Goals5-Info.plist */,
 				83E145FC144E435B00F6D219 /* InfoPlist.strings */,
 				83E145FF144E435B00F6D219 /* main.m */,
@@ -217,12 +220,6 @@
 		83E14633144E474700F6D219 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F00BB7181474D9A500E1C3DB /* GroupTableViewController.h */,
-				F00BB7191474D9A500E1C3DB /* GroupTableViewController.m */,
-				F00BB7141474D74800E1C3DB /* GoalsAddViewController.h */,
-				F00BB7151474D74800E1C3DB /* GoalsAddViewController.m */,
-				F0518ED41460400C00B8804C /* ProgressRangeController.h */,
-				F0518ED51460400C00B8804C /* ProgressRangeController.m */,
 				83E1463A144E6B2000F6D219 /* GoalsTableViewController.h */,
 				83E1463B144E6B2000F6D219 /* GoalsTableViewController.m */,
 				83E1463D144E6B8400F6D219 /* GoalsTableViewCellController.h */,
@@ -237,6 +234,8 @@
 				83E1464D144E8F6F00F6D219 /* ProgressTableViewCellController.m */,
 				83E14652144F24C400F6D219 /* GoalsEditViewController.h */,
 				83E14653144F24C500F6D219 /* GoalsEditViewController.m */,
+				8382E28D1459B2A900A6C8BA /* ProgressRangeController.h */,
+				8382E28E1459B2A900A6C8BA /* ProgressRangeController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -322,6 +321,9 @@
 			files = (
 				83E145FE144E435B00F6D219 /* InfoPlist.strings in Resources */,
 				83E14636144E47D400F6D219 /* Main.storyboard in Resources */,
+				8334CCE5148D626700F7532D /* progress_background.png in Resources */,
+				8364E500148DA40900624DA5 /* checked.png in Resources */,
+				8364E501148DA40900624DA5 /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,9 +372,7 @@
 				83E1464B144E8EAC00F6D219 /* ProgressTableViewController.m in Sources */,
 				83E1464E144E8F6F00F6D219 /* ProgressTableViewCellController.m in Sources */,
 				83E14654144F24C500F6D219 /* GoalsEditViewController.m in Sources */,
-				F0518ED61460400C00B8804C /* ProgressRangeController.m in Sources */,
-				F00BB7161474D74800E1C3DB /* GoalsAddViewController.m in Sources */,
-				F00BB71A1474D9A500E1C3DB /* GroupTableViewController.m in Sources */,
+				8382E28F1459B2A900A6C8BA /* ProgressRangeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

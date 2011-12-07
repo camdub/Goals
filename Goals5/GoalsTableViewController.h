@@ -10,8 +10,10 @@
 
 @interface GoalsTableViewController : UITableViewController{
     NSArray * goals;
+    NSArray * timeFrames;
 }
 
 @property(nonatomic, retain) NSArray * goals;
+@property(nonatomic, retain) NSArray * timeFrames;
 
 @end

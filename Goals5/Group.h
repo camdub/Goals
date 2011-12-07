@@ -25,5 +25,6 @@
 
 + (Group *)initWithName:(NSString *)name;
 + (NSArray *)groups;
++ (Group *)findByName:(NSString *)name;
 
 @end
