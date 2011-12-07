@@ -21,6 +21,8 @@
 @synthesize pickerView;
 @synthesize pointValueLabel;
 
+@synthesize delegate;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -144,10 +146,15 @@
         }];
 
         //NSLog([NSString stringWithFormat:@"The timeframe: %d",selected]);
-        [Goal createWithName:nameTextField.text 
+        Goal * goal = [Goal createWithName:nameTextField.text 
               timeFrame:[timeFrames objectAtIndex:selected] 
               pointValue:[pointValueLabel.text intValue]  
               active:YES];
+        
+        if(groups != nil)
+            [goal addGroups:groups];
+        
+        [[self delegate] didCreateGoal]; // notify parent that a new goal was created
         
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -263,5 +270,19 @@
         
          return YES;
      }
+
+    - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        
+        if([[segue identifier] isEqualToString:@"GroupChoiceSegue"]){
+            GroupTableViewController * receivingController = (GroupTableViewController *)[segue destinationViewController];
+            receivingController.delegate = self;
+        }
+
+    }
+
+    - (void) setSelectedGroups:(NSSet *)group_set {
+        
+        groups = [[NSSet alloc] initWithSet:group_set];
+    }
      
 @end

@@ -8,15 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol GroupSelectionDelegate
--(void) setSelectedGroups:(NSArray *)groups;
+@protocol GroupSelectionDelegate;
+
+@protocol GroupSelectionDelegate <NSObject>
+    - (void) setSelectedGroups:(NSSet *)group_set;
 @end
 
-@interface GroupTableViewController : UITableViewController {
+@interface GroupTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
     
-    NSArray * groups;
+    NSMutableArray * selected;
+    NSFetchedResultsController * _fetchedResultsController;
 }
 
+@property (nonatomic, retain) NSFetchedResultsController * fetchedResultsController;
 @property (nonatomic, assign) id <GroupSelectionDelegate> delegate;
+@property (nonatomic, retain) NSMutableArray * selected;
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end

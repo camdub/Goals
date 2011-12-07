@@ -8,11 +8,44 @@
 
 #import "GroupTableViewController.h"
 #import "AppDelegate.h"
+#import "Group.h"
 
 
 @implementation GroupTableViewController
 
 @synthesize delegate;
+@synthesize selected;
+@synthesize fetchedResultsController = _fetchedResultsController;
+
+- (NSFetchedResultsController *) fetchedResultsController {
+    
+    if(_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription * entity = [NSEntityDescription entityForName:@"Group" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSFetchedResultsController * theController = [[NSFetchedResultsController alloc] 
+                                                  initWithFetchRequest:fetchRequest 
+                                                  managedObjectContext:context 
+                                                  sectionNameKeyPath:nil 
+                                                  cacheName:@"Root"];
+    
+    self.fetchedResultsController = theController;
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,19 +69,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
     NSError * error;
-    groups = [context executeFetchRequest:[[appDelegate managedObjectModel] fetchRequestTemplateForName:@"Group_all"] error:&error];
+    if(![[self fetchedResultsController] performFetch:&error]) {
+        
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1); // Failed
+    }
+    
+    // init the array for objects
+    NSUInteger c = [[_fetchedResultsController fetchedObjects] count];
+    self.selected = [[NSMutableArray alloc] initWithCapacity:c];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,6 +101,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    // Testing
+    for (Group * group in selected) {
+        NSLog(@"Selected group name: %@", group.name);
+    }
+    
+    [[self delegate] setSelectedGroups:[NSSet setWithArray:self.selected]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -88,7 +132,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [groups count] - 1;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    Group * group = [_fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", group.name];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,6 +152,8 @@
     }
     
     // Configure the cell...
+    //cell.textLabel.text = [[groups objectAtIndex:[indexPath row]] name];
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
@@ -148,13 +201,74 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Check the selected cell -- TODO: add functionality for "All" cell
+    // selected contains a list of strings of the groups that were selected
+    UITableViewCell * selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
+        selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        [self.selected addObject:[_fetchedResultsController objectAtIndexPath:indexPath]];
+    }
+    else {
+        selectedCell.accessoryType = UITableViewCellAccessoryNone;
+        [self.selected removeObject:[_fetchedResultsController objectAtIndexPath:indexPath]];
+    }
+}
+
+# pragma mark - NSFetchedResultsController delegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // Reloading the section inserts a new row and ensures that titles are updated appropriately.
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
 }
 
 @end

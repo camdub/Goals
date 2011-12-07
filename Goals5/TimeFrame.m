@@ -60,4 +60,13 @@ static int * count;
     }
     return [fetchedObjects objectAtIndex:0];
 }
+
++ (NSArray *)all { // returns all TimeFrames
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSError * error;
+    return [context executeFetchRequest:[[appDelegate managedObjectModel] fetchRequestTemplateForName:@"TimeFrame_all"] error:&error];
+}
+
 @end
