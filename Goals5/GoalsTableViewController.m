@@ -134,11 +134,7 @@
     } else {
         [button setImage:checked forState:UIControlStateNormal];
     }
-
 }
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath { 
-    NSLog(@"Entered the accessory button tapped for row with indexpath method");
-} 
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

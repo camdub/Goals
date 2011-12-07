@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Completion" representedClassName="Completion" syncable="YES">
-        <attribute name="timestamp" optional="YES" attributeType="Date" defaultDateTimeInterval="344847600" defaultValueString="today" syncable="YES"/>
+        <attribute name="timestamp" attributeType="Date" defaultDateTimeInterval="344934000" defaultValueString="today" syncable="YES"/>
         <relationship name="goal" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="completions" inverseEntity="Goal" syncable="YES"/>
     </entity>
     <entity name="Goal" representedClassName="Goal" syncable="YES">
         <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="createdDate" attributeType="Date" defaultDateTimeInterval="344847600" defaultValueString="today" syncable="YES"/>
+        <attribute name="createdDate" attributeType="Date" defaultDateTimeInterval="344934000" defaultValueString="today" syncable="YES"/>
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pointValue" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>

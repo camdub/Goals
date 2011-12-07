@@ -88,9 +88,55 @@
     NSString * timeFrameName = [(TimeFrame *)[currentGoal timeFrame] name];
     NSDate * startDate;
     NSDate * endDate;
-    
+    NSLog(@"Today: %@",[today description]);
     startDate = today;
     endDate = today;
+    if ([timeFrameName isEqualToString: @"Daily"]) {
+        
+    } else if([timeFrameName isEqualToString: @"Weekly"]){
+        [dateFormatter setDateFormat:@"EEE"];
+        while (![[dateFormatter stringFromDate: startDate] isEqualToString: @"Sun"]) {
+            startDate = [NSDate dateWithTimeInterval:(-1*DAY) sinceDate:startDate];
+        }
+        //Set the tempend date to the next Saturday
+        while (![[dateFormatter stringFromDate: endDate] isEqualToString: @"Sat"]) {
+            endDate = [NSDate dateWithTimeInterval:DAY sinceDate:endDate];
+        }
+    } else if([timeFrameName isEqualToString: @"Monthly"]){
+        //Set the tempend date to the last day of the month
+        [dateFormatter setDateFormat:@"dd"];
+        while (![[dateFormatter stringFromDate: startDate] isEqualToString: @"01"]) {
+            startDate = [NSDate dateWithTimeInterval:(-1*DAY) sinceDate:startDate];
+        }
+        while (![[dateFormatter stringFromDate: [NSDate dateWithTimeInterval:DAY sinceDate:endDate]] isEqualToString: @"01"]) {
+            endDate = [NSDate dateWithTimeInterval:DAY sinceDate:endDate];
+        }
+    } else if([timeFrameName isEqualToString: @"Quarterly"]){
+        //Set the tempend date to the last day of the quarter
+        [dateFormatter setDateFormat:@"MM-dd"];
+        while (![[dateFormatter stringFromDate: startDate] isEqualToString: @"4-01"]
+               && ![[dateFormatter stringFromDate: startDate] isEqualToString: @"7-01"]
+               && ![[dateFormatter stringFromDate: startDate] isEqualToString: @"10-01"]
+               && ![[dateFormatter stringFromDate: startDate] isEqualToString: @"1-01"]) {
+            startDate = [NSDate dateWithTimeInterval:(-1*DAY) sinceDate:startDate];
+        }
+        
+        while (![[dateFormatter stringFromDate: [NSDate dateWithTimeInterval:DAY sinceDate:endDate]] isEqualToString: @"4-01"]
+               && ![[dateFormatter stringFromDate: [NSDate dateWithTimeInterval:DAY sinceDate:endDate]] isEqualToString: @"7-01"]
+               && ![[dateFormatter stringFromDate: [NSDate dateWithTimeInterval:DAY sinceDate:endDate]] isEqualToString: @"10-01"]
+               && ![[dateFormatter stringFromDate: [NSDate dateWithTimeInterval:DAY sinceDate:endDate]] isEqualToString: @"1-01"]) {
+            endDate = [NSDate dateWithTimeInterval:DAY sinceDate:endDate];
+        }
+    } else if([timeFrameName isEqualToString: @"Annually"]){
+        //Set the tempend date to the last day of the year - dec 31                
+        [dateFormatter setDateFormat:@"MM-dd"];
+        while (![[dateFormatter stringFromDate: startDate] isEqualToString: @"01-01"]) {
+            startDate = [NSDate dateWithTimeInterval:(-1*DAY) sinceDate:startDate];
+        }
+        while (![[dateFormatter stringFromDate: endDate] isEqualToString: @"12-31"]) {
+            endDate = [NSDate dateWithTimeInterval:DAY sinceDate:endDate];
+        }
+    }
     
     
     NSDictionary *subVars=[NSDictionary dictionaryWithObjectsAndKeys: startDate, @"START", endDate, @"END", nil];

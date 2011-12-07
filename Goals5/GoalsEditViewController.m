@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
 
-    //timeFrames = [TimeFrame all]; // store an array of timeframes for convenience
+    timeFrames = [TimeFrame activeTimeFrames]; // store an array of timeframes for convenience
     timeFrameTextField.text = @"Daily"; // set default frequency to Daily
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -235,7 +235,7 @@
          //NSLog(@"barnyard: %@", barnyard);
          //NSLog(@"animalTypes: %@", [barnyard animalTypes]);
 #endif
-         return [timeFrames count] - 1;
+         return [timeFrames count];
      }
      
 #pragma mark - Picker delegate
