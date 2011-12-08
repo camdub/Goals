@@ -8,22 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "GroupTableViewController.h"
+#import "Goal.h"
 
 @protocol GoalCreationDelegate <NSObject>
     - (void) didCreateGoal;
 @end
 
-@interface GoalsEditViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, GroupSelectionDelegate>{
+@interface GoalsEditViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, GroupSelectionDelegate> {
     UIActionSheet *pickerSheet;
     UIPickerView *pickerView;
     UILabel *pointValueLabel;
     
     NSArray *timeFrames;
     NSMutableArray * groups;
+    Goal * editGoal;
 }
 
 - (IBAction)done:(id)sender;
 - (IBAction)cancel:(id)sender;
+- (IBAction)textFieldDoneEditing:(id)sender;
+
+@property (nonatomic, retain) Goal * editGoal;
 
 @property (weak, nonatomic) IBOutlet UITextField *frequencyTextField;
 @property (nonatomic, retain) IBOutlet UILabel *pointValueLabel;
