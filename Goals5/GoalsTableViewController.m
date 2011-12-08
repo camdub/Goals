@@ -8,6 +8,7 @@
 
 #import "GoalsTableViewController.h"
 #import "GoalsTableViewCellController.h"
+#import "GoalsDetailController.h"
 #import "AppDelegate.h"
 #import "Goal.h"
 #import "TimeFrame.h"
@@ -174,17 +175,21 @@
 }
 */
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([[segue identifier] isEqualToString:@"GoalDetail"]){
+        GoalsDetailController * receivingController = (GoalsDetailController *)[segue destinationViewController];
+        NSIndexPath * indexPath = [[self tableView] indexPathForCell:(UITableViewCell *)sender];
+        receivingController.goal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
+
+    }
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
 }
 
 @end

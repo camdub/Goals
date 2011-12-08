@@ -7,8 +7,16 @@
 //
 
 #import "GoalsDetailController.h"
+#import "TimeFrame.h"
+#import "Group.h"
 
 @implementation GoalsDetailController
+@synthesize goalName;
+@synthesize frequency;
+@synthesize pointValue;
+@synthesize groups;
+@synthesize goalDetails;
+@synthesize goal;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,16 +44,33 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    goalName.text = goal.name;
+    pointValue.text = [NSString stringWithFormat:@"%d", [goal.pointValue intValue]];
+    frequency.text = [(TimeFrame *)goal.timeFrame name];
+    
+    // Create string of the groups
+    NSString * result = @"";
+    for(Group * group in goal.groups) {
+        
+        [result stringByAppendingFormat:@"@, ", group.name];
+    }
+    groups.text = result;
+    
     [super viewDidLoad];
 }
-*/
+
 
 - (void)viewDidUnload
 {
+    [self setGoalName:nil];
+    [self setFrequency:nil];
+    [self setPointValue:nil];
+    [self setGroups:nil];
+    [self setGoalDetails:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

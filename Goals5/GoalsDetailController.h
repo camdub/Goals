@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Goal.h"
 
-@interface GoalsDetailController : UIViewController
+@interface GoalsDetailController : UIViewController {
+    
+    Goal * goal;
+}
+
+@property (nonatomic, retain) Goal * goal;
+
+@property (weak, nonatomic) IBOutlet UILabel *goalName;
+@property (weak, nonatomic) IBOutlet UILabel *frequency;
+@property (weak, nonatomic) IBOutlet UILabel *pointValue;
+@property (weak, nonatomic) IBOutlet UILabel *groups;
+@property (weak, nonatomic) IBOutlet UILabel *goalDetails;
 
 @end
