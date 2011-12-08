@@ -46,6 +46,17 @@
     }
     return goal;
 }
+
+- (void)save {
+    
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSError *error;
+    if (![context save:&error])
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+} 
+
 + (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active createdDate:(NSDate *)date{
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
