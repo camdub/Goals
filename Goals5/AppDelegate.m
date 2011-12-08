@@ -78,46 +78,102 @@
     NSUInteger groupCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Group_all"] error:&error];
     if(groupCount < 1) {
         [Group initWithName:@"All"];
-        [Group initWithName:@"Family Life"];
+        [Group initWithName:@"Wellness"];
+        [Group initWithName:@"Family"];
         [Group initWithName:@"Career Development"];
         [Group initWithName:@"Spiritual"];
+        [Group initWithName:@"Academic"];
     }
     //----DEMO DATA
     NSUInteger goalCount = [self.managedObjectContext countForFetchRequest:[self.managedObjectModel fetchRequestTemplateForName:@"Goal_all"] error:&error];
     
     if(goalCount < 10) {
-        Goal * goal1;
-        Goal * goal2;
-        Goal * goal3;
-        Goal * goal4;
-        Goal * goal5;
-        //NSDate * baseTestDate = [NSDate dateWithTimeIntervalSince1970:1317427200];//Oct 1, 2011
-        NSDate * baseTestDate = [NSDate dateWithTimeIntervalSinceNow:0];//now!
-        NSTimeInterval day = 86400;
-        //NSTimeInterval week = day * 7;
-        NSTimeInterval month = day * 32;
-        //NSTimeInterval year = day * 365;
+        Goal * goal;
+        
+        Group * wellnessGroup = [Group findByName:@"Wellness"];
+        Group * academicGroup = [Group findByName:@"Academic"];
+        Group * spiritualGroup = [Group findByName:@"Spiritual"];
+        Group * familyGroup = [Group findByName:@"Family"];
+        
+        goal = [Goal 
+                 createWithName:@"Walk the Dog"
+                 timeFrame:[TimeFrame findByName:@"Daily"]       
+                 pointValue:1 
+                 active:YES 
+                 groups:[NSSet setWithObjects: nil] 
+                 description:@"Go around the neighborhood"];        
+        goal = [Goal 
+                 createWithName:@"Take Daily Vitamin"
+                 timeFrame:[TimeFrame findByName:@"Daily"]
+                 pointValue:1
+                 active:YES groups:[NSSet setWithObjects: wellnessGroup , nil]
+                 description:@"In order to stay healthy I must supliment my diet with a multi vitamin"];
+        goal = [Goal 
+                 createWithName:@"Go to Church"
+                 timeFrame:[TimeFrame findByName:@"Weekly"]
+                 pointValue:3
+                 active:YES
+                 groups:[NSSet setWithObjects: spiritualGroup, nil]
+                 description:@"The Lords Commands It"];
+        goal = [Goal 
+                 createWithName:@"Go Hometeaching"
+                 timeFrame:[TimeFrame findByName:@"Monthly"]
+                 pointValue:2
+                 active:YES
+                 groups:[NSSet setWithObjects: spiritualGroup, nil]
+                 description:@"Need to get 100% on hometeaching"];
+        goal = [Goal 
+                 createWithName:@"Read a Book"
+                 timeFrame:[TimeFrame findByName:@"Quarterly"]    
+                 pointValue:3 
+                 active:YES groups:[NSSet setWithObjects: academicGroup, nil] 
+                 description:@"Enjoy a fiction book or read a biography"];
+        goal = [Goal 
+                createWithName:@"Take a Family Vacation"
+                timeFrame:[TimeFrame findByName:@"Annually"]    
+                pointValue:3 
+                active:YES groups:[NSSet setWithObjects: familyGroup, nil] 
+                description:@"The family needs to do something memorable every year together."];
+        goal = [Goal 
+                createWithName:@"Spend 30 min with Alice"
+                timeFrame:[TimeFrame findByName:@"Daily"]
+                pointValue:4 
+                active:YES groups:[NSSet setWithObjects: familyGroup, nil] 
+                description:@"Kids need attention"];
+        goal = [Goal 
+                createWithName:@"Read Scriptures"
+                timeFrame:[TimeFrame findByName:@"Daily"]
+                pointValue:2 
+                active:YES groups:[NSSet setWithObjects: spiritualGroup, nil] 
+                description:@"5 min will do, just do it every day."];
+        goal = [Goal 
+                createWithName:@"Have Family Home Evening"
+                timeFrame:[TimeFrame findByName:@"Weekly"]
+                pointValue:3 
+                active:YES groups:[NSSet setWithObjects: familyGroup, spiritualGroup, nil] 
+                description:@"Usually this should be done on Monday, but it's important it gets done."];
+        goal = [Goal 
+                createWithName:@"Read the Word of the Day"
+                timeFrame:[TimeFrame findByName:@"Daily"]
+                pointValue:1 
+                active:YES groups:[NSSet setWithObjects: academicGroup, nil] 
+                description:@"The dictionary.com app has the word of the day on it"];
+        goal = [Goal 
+                createWithName:@"Read the Ensign"
+                timeFrame:[TimeFrame findByName:@"Weekly"]
+                pointValue:1 
+                active:YES groups:[NSSet setWithObjects:academicGroup, spiritualGroup, nil] 
+                description:@"Full of good articles."];
         
         /*
-        //Active 1
-        goal1 = [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES createdDate:baseTestDate];
-        goal2 = [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES createdDate:baseTestDate];
-        goal3 = [Goal createWithName:@"Monthly Active 1 Point"      timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:1 active:YES createdDate:baseTestDate];
-        goal4 = [Goal createWithName:@"Quarterly Active 1 Point"    timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:1 active:YES createdDate:baseTestDate];
-        goal5 = [Goal createWithName:@"Annually Active 1 Point"     timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:1 active:YES createdDate:baseTestDate];
-        //Add some completion data for these goals
-        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*1 sinceDate:baseTestDate]];
-        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*2 sinceDate:baseTestDate]];
-        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
-        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*4 sinceDate:baseTestDate]];
-        [Completion initForGoal:goal1 withTimestamp:[NSDate dateWithTimeInterval:day*5 sinceDate:baseTestDate]];
-        
         [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*2 sinceDate:baseTestDate]];
         [Completion initForGoal:goal2 withTimestamp:[NSDate dateWithTimeInterval:day*12 sinceDate:baseTestDate]];
         
         [Completion initForGoal:goal3 withTimestamp:[NSDate dateWithTimeInterval:day*3 sinceDate:baseTestDate]];
         [Completion initForGoal:goal3 withTimestamp:[NSDate dateWithTimeInterval:month+day*6 sinceDate:baseTestDate]];
+         */
         
+        /*
         //Active 2
         [Goal createWithName:@"Daily Active 2 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:2 active:YES ];
         [Goal createWithName:@"Weekly Active 2 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:2 active:YES ];

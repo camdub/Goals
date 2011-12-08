@@ -920,7 +920,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JC9-xy-NUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="ptO-Lk-ZYN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Goals" id="ewg-ZR-ONw"/>
+                    <tabBarItem key="tabBarItem" title="Goals" image="List.png" id="ewg-ZR-ONw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="lc3-LL-PiT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -955,7 +955,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A09-Xg-ZRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="jMp-nF-qYE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Progress" id="NFQ-K3-1vw"/>
+                    <tabBarItem key="tabBarItem" title="Progress" image="Graph.png" id="NFQ-K3-1vw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="RkS-ng-xyP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -989,6 +989,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Graph.png" width="36" height="36"/>
+        <image name="List.png" width="36" height="36"/>
         <image name="progress_background.png" width="320" height="275"/>
         <image name="unchecked.png" width="43" height="43"/>
     </resources>

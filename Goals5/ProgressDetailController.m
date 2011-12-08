@@ -10,6 +10,8 @@
 #import "Completion.h"
 #import "ProgressRangeController.h"
 
+#define DAY 86400
+
 @implementation ProgressDetailController
 
 @synthesize group;
@@ -63,23 +65,15 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     if (activeStartDate == nil) {
-        NSDate * now = [NSDate dateWithTimeIntervalSince1970:1317427200];//Oct 1, 2011
-        activeStartDate = now;
-        activeEndDate = [NSDate dateWithTimeInterval:86400*7 sinceDate:now];
-        comparisonStartDate = now;
-        comparisonEndDate = [NSDate dateWithTimeInterval:86400*7 sinceDate:now];
+        activeStartDate = [NSDate date];
+        activeEndDate = [NSDate dateWithTimeInterval:DAY*7 sinceDate:activeStartDate];
+        comparisonEndDate = [NSDate dateWithTimeInterval:(-1)*DAY sinceDate:activeStartDate];
+        comparisonStartDate = [NSDate dateWithTimeInterval:(-1)*DAY*7 sinceDate:comparisonEndDate];
     }
     
     //Set Date Labels
