@@ -49,6 +49,12 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    [self displayGoal];
+    [super viewDidLoad];
+}
+
+- (void) displayGoal {
+    
     goalName.text = goal.name;
     pointValue.text = [NSString stringWithFormat:@"%d", [goal.pointValue intValue]];
     frequency.text = [(TimeFrame *)goal.timeFrame name];
@@ -64,8 +70,6 @@
     NSRange range = NSMakeRange(0, [result length]-2); // get rid of last comma
     result = [result substringWithRange:range];
     groups.text = result;
-    
-    [super viewDidLoad];
 }
 
 
@@ -87,11 +91,22 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+#pragma mark - Segue/Delegate Methods
+
+- (void) didEditGoal:(Goal *)editedGoal {
+    
+    goal = editedGoal; // update the class goal object, and rerender it
+    [self displayGoal];
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([[segue identifier] isEqualToString:@"EditGoal"]) {
-        GoalsEditViewController * receivingController = (GoalsEditViewController *)[segue destinationViewController];
-        receivingController.editGoal = goal;
+        UINavigationController * receivingController = (UINavigationController *)[segue destinationViewController];
+        GoalsEditViewController * editView = (GoalsEditViewController *)receivingController.topViewController;
+        editView.delegate = self;
+        editView.editGoal = goal;
     }
 }
 

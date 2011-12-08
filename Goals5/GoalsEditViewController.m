@@ -58,6 +58,9 @@
         pointValueLabel.text = [NSString stringWithFormat:@"%d", [editGoal.pointValue intValue]];
         goalDetails.text = editGoal.details;
         frequencyTextField.text = [(TimeFrame * )editGoal.timeFrame name];
+        
+        // Set this goals groups
+        groups = [NSMutableArray arrayWithCapacity:[editGoal.groups count]];
         [groups addObjectsFromArray:[editGoal.groups allObjects]];
     }
  
@@ -160,18 +163,29 @@
 
             return [[tfobj name] isEqualToString: timeFrameTextField.text];
         }];
-
-        //NSLog([NSString stringWithFormat:@"The timeframe: %d",selected]);
-        Goal * goal = [Goal createWithName:nameTextField.text 
-              timeFrame:[timeFrames objectAtIndex:selected] 
-              pointValue:[pointValueLabel.text intValue]  
-              active:YES
-              groups:[NSSet setWithArray:groups] 
-              description:goalDetails.text];
         
-        NSLog(@"%d", [goal.groups count]);
-        
-        [[self delegate] didCreateGoal]; // notify parent that a new goal was created
+        if(editGoal == nil) { // THIS IS A NEW GOAL
+            
+            [Goal createWithName:nameTextField.text 
+                  timeFrame:[timeFrames objectAtIndex:selected] 
+                  pointValue:[pointValueLabel.text intValue]  
+                  active:YES
+                  groups:[NSSet setWithArray:groups] 
+                  description:goalDetails.text];
+            
+            //[[self delegate] didCreateGoal]; // notify parent that a new goal was created
+        } else { // THIS GOAL IS BEING EDITED
+            
+            editGoal.name = nameTextField.text;
+            editGoal.timeFrame = [timeFrames objectAtIndex:selected];
+            editGoal.pointValue = [NSNumber numberWithInteger:[pointValueLabel.text intValue]];
+            editGoal.groups = [NSSet setWithArray:groups];
+            editGoal.details = goalDetails.text;
+            
+            [editGoal save];
+            
+            [[self delegate] didEditGoal:editGoal];
+        }
         
         [self dismissModalViewControllerAnimated:YES];
     }

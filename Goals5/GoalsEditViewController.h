@@ -11,7 +11,7 @@
 #import "Goal.h"
 
 @protocol GoalCreationDelegate <NSObject>
-    - (void) didCreateGoal;
+    - (void) didEditGoal:(Goal *)editedGoal;
 @end
 
 @interface GoalsEditViewController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, GroupSelectionDelegate> {

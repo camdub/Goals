@@ -36,6 +36,7 @@
 
 + (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active groups:(NSSet *)groups description:(NSString *)details;
 + (Goal *)createWithName:(NSString *)name timeFrame:(TimeFrame *)timeFrame pointValue:(int)pointValue active:(bool)active createdDate:(NSDate *)date;
+- (void) save;
 + (NSArray *)goals;
 
 

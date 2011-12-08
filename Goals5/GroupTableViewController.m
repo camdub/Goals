@@ -30,6 +30,10 @@
     NSEntityDescription * entity = [NSEntityDescription entityForName:@"Group" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
+    // All groups are in the All group so it doesn't need to be listed
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"name != %@",@"All"];
+    [fetchRequest setPredicate:predicate];
+    
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     

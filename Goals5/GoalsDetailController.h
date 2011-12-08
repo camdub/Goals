@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Goal.h"
+#import "GoalsEditViewController.h"
 
-@interface GoalsDetailController : UIViewController {
+@interface GoalsDetailController : UIViewController <GoalCreationDelegate> {
     
     Goal * goal;
 }
@@ -21,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *pointValue;
 @property (weak, nonatomic) IBOutlet UILabel *groups;
 @property (weak, nonatomic) IBOutlet UILabel *goalDetails;
+
+- (void) displayGoal;
 
 @end
