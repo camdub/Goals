@@ -9,6 +9,7 @@
 #import "GoalsDetailController.h"
 #import "TimeFrame.h"
 #import "Group.h"
+#import "GoalsEditViewController.h"
 
 @implementation GoalsDetailController
 @synthesize goalName;
@@ -55,11 +56,13 @@
     
     // Create string of the groups
     NSString * result = @"";
-    for(Group * group in goal.groups) {
-        
-        if(group.name != @"All")
+    for(Group * group in goal.groups) 
+    {
+        if(![group.name isEqualToString:@"All"])
             result = [result stringByAppendingString:[NSString stringWithFormat:@"%@, ", group.name]];
     }
+    NSRange range = NSMakeRange(0, [result length]-2); // get rid of last comma
+    result = [result substringWithRange:range];
     groups.text = result;
     
     [super viewDidLoad];
@@ -82,6 +85,14 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([[segue identifier] isEqualToString:@"EditGoal"]) {
+        GoalsEditViewController * receivingController = (GoalsEditViewController *)[segue destinationViewController];
+        receivingController.editGoal = goal;
+    }
 }
 
 @end

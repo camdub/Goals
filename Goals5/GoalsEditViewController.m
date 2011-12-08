@@ -22,6 +22,7 @@
 @synthesize goalDetails;
 @synthesize pointValueLabel;
 
+@synthesize editGoal;
 @synthesize delegate;
 
 
@@ -50,6 +51,15 @@
 
     timeFrames = [TimeFrame activeTimeFrames]; // store an array of timeframes for convenience
     timeFrameTextField.text = @"Daily"; // set default frequency to Daily
+    
+    if(editGoal != nil) { // this is being edited, add info to the view
+        
+        nameTextField.text = editGoal.name;
+        pointValueLabel.text = [NSString stringWithFormat:@"%d", [editGoal.pointValue intValue]];
+        goalDetails.text = editGoal.details;
+        frequencyTextField.text = [(TimeFrame * )editGoal.timeFrame name];
+        [groups addObjectsFromArray:[editGoal.groups allObjects]];
+    }
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -135,6 +145,10 @@
 */
 
 #pragma mark - Action Methods
+
+- (IBAction)textFieldDoneEditing:(id)sender {
+    [sender resignFirstResponder];
+}
 
 - (IBAction)done:(id)sender {
     
