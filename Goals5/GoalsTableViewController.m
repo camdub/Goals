@@ -61,6 +61,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[self tableView] reloadData];
     [super viewWillAppear:animated];
 }
 
@@ -112,9 +113,8 @@
     }
     // Configure the cell...
     Goal * goal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
-    NSLog(@"%@ Completions: %d",[goal name],[[goal completions] count]);
     cell.nameLabel.text = [goal name];
-    if ([goal hasCompletionThisTimeFrame]) {
+    if ([goal hasCurrentCompletion]) {
         [[cell checkButton] setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
     } else {
         [[cell checkButton] setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
@@ -122,17 +122,17 @@
     return cell;
 }
 - (IBAction)checked:(id)sender {
-    UIView *senderButton = (UIView*) sender;
-    NSIndexPath *indexPath = [[self tableView] indexPathForCell: (UITableViewCell*)[[senderButton superview]superview]];
-    Goal * checkedGoal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
-    [Completion initForGoal:checkedGoal];
-    
+        
     UIButton * button = (UIButton *)sender;
+    NSIndexPath *indexPath = [[self tableView] indexPathForCell: (UITableViewCell*)[[button superview]superview]];
+    Goal * goal = [[(NSSet *)[[self.timeFrames objectAtIndex:[indexPath section]] goals] allObjects] objectAtIndex:[indexPath row]];
     UIImage * checked = [UIImage imageNamed:@"checked"];
     UIImage * unchecked = [UIImage imageNamed:@"unchecked"];
     if ([button imageForState:UIControlStateNormal] == checked) {
+        [goal removeCurrentCompletion];
         [button setImage:unchecked forState:UIControlStateNormal];
     } else {
+        [Completion initForGoal:goal];
         [button setImage:checked forState:UIControlStateNormal];
     }
 }
