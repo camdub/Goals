@@ -512,11 +512,21 @@
                                     <segue destination="zxF-xV-e1d" kind="push" identifier="ProgressRangeControllerSegue" id="7y4-Vs-wLO"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="help_overlay.png" id="yEH-er-ycT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="tTI-wr-llV"/>
+                    <navigationItem key="navigationItem" id="tTI-wr-llV">
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="KjL-PG-DCP">
+                            <connections>
+                                <action selector="toggleHelp:" destination="Viw-ns-DaR" id="Ie7-44-L1S"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activeEndDateLabel" destination="qXZ-zG-bfd" id="wht-QN-HSg"/>
@@ -535,6 +545,8 @@
                         <outlet property="dailyCompleteLabel" destination="h66-tD-nBK" id="pY3-2z-l38"/>
                         <outlet property="dailyCompletePointsCompletedLabel" destination="hbH-if-ckJ" id="Yk4-k2-4NZ"/>
                         <outlet property="dailyCompletePointsPossibleLabel" destination="ytN-aR-wDb" id="j9o-ve-iQB"/>
+                        <outlet property="helpButton" destination="KjL-PG-DCP" id="PyW-03-DOw"/>
+                        <outlet property="helpOverlay" destination="yEH-er-ycT" id="Dc4-Tr-c5m"/>
                         <outlet property="monthlyChangeLabel" destination="NK2-3w-0An" id="lLe-D5-thT"/>
                         <outlet property="monthlyChangePointsCompletedLabel" destination="RQc-L0-FYw" id="GC3-bt-Tal"/>
                         <outlet property="monthlyChangePointsPossibleLabel" destination="STZ-31-LmM" id="KpY-RH-7G2"/>
@@ -592,7 +604,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ZFE-RO-hjx">
-                                <rect key="frame" x="20" y="115" width="115" height="31"/>
+                                <rect key="frame" x="20" y="111" width="115" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -601,7 +613,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="GGP-sZ-O6n">
-                                <rect key="frame" x="185" y="115" width="115" height="31"/>
+                                <rect key="frame" x="185" y="111" width="115" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -611,19 +623,23 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="bhf-WK-zjC">
-                                <rect key="frame" x="139" y="120" width="42" height="21"/>
+                                <rect key="frame" x="139" y="116" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Rfs-M2-H6h">
-                                <rect key="frame" x="221" y="68" width="79" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Compare To" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="5Hm-NX-ka8">
+                                <rect key="frame" x="20" y="71" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Comparison Mode" lineBreakMode="tailTruncation" minimumFontSize="10" id="5Hm-NX-ka8">
-                                <rect key="frame" x="20" y="71" width="142" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" lineBreakMode="wordWrap" numberOfLines="17" adjustsFontSizeToFit="NO" minimumFontSize="10" id="8q2-qk-cqK">
+                                <rect key="frame" x="20" y="175" width="280" height="177"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Set the date range you would like to see progress for and the date range you would like to compare it to.  Just choose a start date and an end date.  Then choose a start date for the comparison range and the end date will be set for you automatically.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -993,7 +1009,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JC9-xy-NUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="ptO-Lk-ZYN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Goals" id="ewg-ZR-ONw"/>
+                    <tabBarItem key="tabBarItem" title="Goals" image="List.png" id="ewg-ZR-ONw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="lc3-LL-PiT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1028,7 +1044,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A09-Xg-ZRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="jMp-nF-qYE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Progress" id="NFQ-K3-1vw"/>
+                    <tabBarItem key="tabBarItem" title="Progress" image="Graph.png" id="NFQ-K3-1vw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="RkS-ng-xyP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1079,6 +1095,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Graph.png" width="36" height="36"/>
+        <image name="List.png" width="36" height="36"/>
+        <image name="help_overlay.png" width="320" height="372"/>
         <image name="progress_background.png" width="320" height="275"/>
         <image name="unchecked.png" width="43" height="43"/>
     </resources>
@@ -1146,6 +1165,8 @@
                 <relationship kind="outlet" name="dailyCompleteLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dailyCompletePointsCompletedLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dailyCompletePointsPossibleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="helpButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="helpOverlay" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="monthlyChangeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="monthlyChangePointsCompletedLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="monthlyChangePointsPossibleLabel" candidateClass="UILabel"/>

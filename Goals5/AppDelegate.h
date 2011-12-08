@@ -21,4 +21,12 @@
 
 -(void) loadData;
 
+
+//A few globals
+#define DAY 86400
+#define SET_TODAY_POINTER   unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit; \
+                            NSCalendar* calendar = [NSCalendar currentCalendar]; \
+                            NSDateComponents* components = [calendar components:flags fromDate:[NSDate date]]; \
+                            NSDate* today = [calendar dateFromComponents:components];
+
 @end

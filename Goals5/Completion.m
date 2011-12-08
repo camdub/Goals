@@ -11,8 +11,6 @@
 #import "Goal.h"
 #import "Group.h"
 
-#define DAY 86400
-
 @implementation Completion
 
 @dynamic timestamp;
@@ -39,15 +37,13 @@
     
     Completion * completion = [NSEntityDescription insertNewObjectForEntityForName:@"Completion" inManagedObjectContext:context];
     completion.goal = goal;
-    //completion.timestamp = [NSDate dateWithTimeIntervalSinceNow:0];
+    SET_TODAY_POINTER
+    completion.timestamp = today;
     
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    } else {
-        
     }
-    NSLog(@"I jsut got saved as a completion with the following format: %@",[[completion timestamp] description]);
 }
 + (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate forGroup:(Group *)group{
     

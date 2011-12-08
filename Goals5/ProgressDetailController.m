@@ -10,8 +10,12 @@
 #import "Completion.h"
 #import "ProgressRangeController.h"
 
+#define DAY 86400
+
 @implementation ProgressDetailController
 
+@synthesize helpButton;
+@synthesize helpOverlay;
 @synthesize group;
 @synthesize activeStartDate;
 @synthesize activeEndDate;
@@ -63,23 +67,15 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     if (activeStartDate == nil) {
-        NSDate * now = [NSDate dateWithTimeIntervalSince1970:1317427200];//Oct 1, 2011
-        activeStartDate = now;
-        activeEndDate = [NSDate dateWithTimeInterval:86400*7 sinceDate:now];
-        comparisonStartDate = now;
-        comparisonEndDate = [NSDate dateWithTimeInterval:86400*7 sinceDate:now];
+        activeEndDate = [NSDate date];
+        activeStartDate = [NSDate dateWithTimeInterval:(-1)*DAY*7 sinceDate:activeEndDate];
+        comparisonEndDate = [NSDate dateWithTimeInterval:(-1)*DAY sinceDate:activeStartDate];
+        comparisonStartDate = [NSDate dateWithTimeInterval:(-1)*DAY*7 sinceDate:comparisonEndDate];
     }
     
     //Set Date Labels
@@ -165,7 +161,7 @@
         //set the points possible
         [[labelPair valueForKey:@"changePointsPossibleLabel"] setText: [NSString stringWithFormat: @"%d", [[comparisonStatsForTimeFrame valueForKey:@"possibles"] integerValue]]];
         //sent the percentage
-        int percentOfChange =[[comparisonStatsForTimeFrame valueForKey:@"stats"] intValue] - [[activeStatsForTimeFrame valueForKey:@"stats"] intValue];
+        int percentOfChange =[[activeStatsForTimeFrame valueForKey:@"stats"] intValue] - [[comparisonStatsForTimeFrame valueForKey:@"stats"] intValue];
         [[labelPair valueForKey:@"changeLabel"] setText:[NSString stringWithFormat:@"%d%%",percentOfChange]];
         if (percentOfChange > 0) {
             [[labelPair valueForKey:@"changeLabel"] setTextColor:positiveColor];
@@ -177,7 +173,9 @@
     }   
     [super viewDidLoad];
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [self viewDidLoad];
+}
 
 - (void)viewDidUnload
 {
@@ -218,6 +216,8 @@
     [self setMonthlyCompletePointsPossibleLabel:nil];
     [self setQuarterlyCompletePointsPossibleLabel:nil];
     [self setAnnuallyCompletePointsPossibleLabel:nil];
+    [self setHelpButton:nil];
+    [self setHelpOverlay:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -227,6 +227,13 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+- (IBAction)toggleHelp:(id)sender {
+    if ([helpOverlay isHidden]) {
+        [helpOverlay setHidden:NO];
+    } else {
+        [helpOverlay setHidden:YES];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

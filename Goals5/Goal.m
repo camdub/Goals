@@ -12,8 +12,6 @@
 #import "TimeFrame.h"
 #import "Completion.h"
 
-#define DAY 86400
-
 @implementation Goal
 
 @dynamic active;
@@ -30,16 +28,14 @@
     
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    //groups = [[NSSet alloc] initWithSet:[groups setByAddingObject:[Group findByName:@"All"]]];
-    
     Goal * goal = [NSEntityDescription insertNewObjectForEntityForName:@"Goal" inManagedObjectContext:context];
     goal.name = name;
     goal.pointValue = [[NSNumber alloc] initWithInt:pointValue];
     goal.timeFrame = timeFrame;
     goal.active = [[NSNumber alloc] initWithBool:active];
-    //goal.groups = groups;
     goal.details = details;
+    SET_TODAY_POINTER
+    goal.createdDate = today;
     [goal addGroups:[groups setByAddingObject:[Group findByName:@"All"]]];
     
     NSError *error;
@@ -96,10 +92,8 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     Goal * currentGoal = (Goal *)self;
     
-    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* components = [calendar components:flags fromDate:[NSDate date]];
-    NSDate* today = [calendar dateFromComponents:components];
+    SET_TODAY_POINTER
+    
     NSDateFormatter  * dateFormatter = [[NSDateFormatter new] init];
     NSString * timeFrameName = [(TimeFrame *)[currentGoal timeFrame] name];
     

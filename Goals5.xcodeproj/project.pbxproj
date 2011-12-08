@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8321ADF2148FF784001BE545 /* GroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8321ADF1148FF784001BE545 /* GroupTableViewController.m */; };
+		8328198E14915156001FC13E /* help_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 8328198D14915156001FC13E /* help_overlay.png */; };
 		8334CCE5148D626700F7532D /* progress_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8334CCE4148D626700F7532D /* progress_background.png */; };
 		8364E500148DA40900624DA5 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8364E4FE148DA40900624DA5 /* checked.png */; };
 		8364E501148DA40900624DA5 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8364E4FF148DA40900624DA5 /* unchecked.png */; };
@@ -39,6 +40,8 @@
 		83E1464E144E8F6F00F6D219 /* ProgressTableViewCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1464D144E8F6F00F6D219 /* ProgressTableViewCellController.m */; };
 		83E14654144F24C500F6D219 /* GoalsEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E14653144F24C500F6D219 /* GoalsEditViewController.m */; };
 		F0822DE21491564C00D197AB /* NewGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0822DE11491564C00D197AB /* NewGroupTableViewController.m */; };
+		83FA2E3F1490875F00EF78E7 /* Graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FA2E3D1490875F00EF78E7 /* Graph.png */; };
+		83FA2E401490875F00EF78E7 /* List.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FA2E3E1490875F00EF78E7 /* List.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,7 @@
 /* Begin PBXFileReference section */
 		8321ADF0148FF784001BE545 /* GroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewController.h; sourceTree = "<group>"; };
 		8321ADF1148FF784001BE545 /* GroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewController.m; sourceTree = "<group>"; };
+		8328198D14915156001FC13E /* help_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_overlay.png; sourceTree = "<group>"; };
 		8334CCE4148D626700F7532D /* progress_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_background.png; sourceTree = "<group>"; };
 		8364E4FE148DA40900624DA5 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = ../checked.png; sourceTree = "<group>"; };
 		8364E4FF148DA40900624DA5 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = ../unchecked.png; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 		83E14653144F24C500F6D219 /* GoalsEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalsEditViewController.m; sourceTree = "<group>"; };
 		F0822DE01491564B00D197AB /* NewGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGroupTableViewController.h; sourceTree = "<group>"; };
 		F0822DE11491564C00D197AB /* NewGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupTableViewController.m; sourceTree = "<group>"; };
+		83FA2E3D1490875F00EF78E7 /* Graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Graph.png; sourceTree = "<group>"; };
+		83FA2E3E1490875F00EF78E7 /* List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = List.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +183,9 @@
 		83E145FA144E435B00F6D219 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8328198D14915156001FC13E /* help_overlay.png */,
+				83FA2E3D1490875F00EF78E7 /* Graph.png */,
+				83FA2E3E1490875F00EF78E7 /* List.png */,
 				8364E4FE148DA40900624DA5 /* checked.png */,
 				8364E4FF148DA40900624DA5 /* unchecked.png */,
 				8334CCE4148D626700F7532D /* progress_background.png */,
@@ -334,6 +343,9 @@
 				8334CCE5148D626700F7532D /* progress_background.png in Resources */,
 				8364E500148DA40900624DA5 /* checked.png in Resources */,
 				8364E501148DA40900624DA5 /* unchecked.png in Resources */,
+				83FA2E3F1490875F00EF78E7 /* Graph.png in Resources */,
+				83FA2E401490875F00EF78E7 /* List.png in Resources */,
+				8328198E14915156001FC13E /* help_overlay.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
