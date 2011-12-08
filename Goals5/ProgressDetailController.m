@@ -14,6 +14,8 @@
 
 @implementation ProgressDetailController
 
+@synthesize helpButton;
+@synthesize helpOverlay;
 @synthesize group;
 @synthesize activeStartDate;
 @synthesize activeEndDate;
@@ -70,8 +72,8 @@
 - (void)viewDidLoad
 {
     if (activeStartDate == nil) {
-        activeStartDate = [NSDate date];
-        activeEndDate = [NSDate dateWithTimeInterval:DAY*7 sinceDate:activeStartDate];
+        activeEndDate = [NSDate date];
+        activeStartDate = [NSDate dateWithTimeInterval:(-1)*DAY*7 sinceDate:activeEndDate];
         comparisonEndDate = [NSDate dateWithTimeInterval:(-1)*DAY sinceDate:activeStartDate];
         comparisonStartDate = [NSDate dateWithTimeInterval:(-1)*DAY*7 sinceDate:comparisonEndDate];
     }
@@ -159,7 +161,7 @@
         //set the points possible
         [[labelPair valueForKey:@"changePointsPossibleLabel"] setText: [NSString stringWithFormat: @"%d", [[comparisonStatsForTimeFrame valueForKey:@"possibles"] integerValue]]];
         //sent the percentage
-        int percentOfChange =[[comparisonStatsForTimeFrame valueForKey:@"stats"] intValue] - [[activeStatsForTimeFrame valueForKey:@"stats"] intValue];
+        int percentOfChange =[[activeStatsForTimeFrame valueForKey:@"stats"] intValue] - [[comparisonStatsForTimeFrame valueForKey:@"stats"] intValue];
         [[labelPair valueForKey:@"changeLabel"] setText:[NSString stringWithFormat:@"%d%%",percentOfChange]];
         if (percentOfChange > 0) {
             [[labelPair valueForKey:@"changeLabel"] setTextColor:positiveColor];
@@ -171,7 +173,9 @@
     }   
     [super viewDidLoad];
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [self viewDidLoad];
+}
 
 - (void)viewDidUnload
 {
@@ -212,6 +216,8 @@
     [self setMonthlyCompletePointsPossibleLabel:nil];
     [self setQuarterlyCompletePointsPossibleLabel:nil];
     [self setAnnuallyCompletePointsPossibleLabel:nil];
+    [self setHelpButton:nil];
+    [self setHelpOverlay:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -221,6 +227,13 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+- (IBAction)toggleHelp:(id)sender {
+    if ([helpOverlay isHidden]) {
+        [helpOverlay setHidden:NO];
+    } else {
+        [helpOverlay setHidden:YES];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

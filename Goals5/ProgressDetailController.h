@@ -19,6 +19,8 @@
     NSDate * comparisonEndDate;
 }
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *helpButton;
+@property (weak, nonatomic) IBOutlet UIImageView *helpOverlay;
 @property(nonatomic, retain) Group * group;
 @property(nonatomic, retain) NSDate * activeStartDate;
 @property(nonatomic, retain) NSDate * activeEndDate;

@@ -43,10 +43,7 @@
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    } else {
-        
     }
-    NSLog(@"I jsut got saved as a completion with the following format: %@",[[completion timestamp] description]);
 }
 + (NSDictionary *)statisticsWithStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate forGroup:(Group *)group{
     

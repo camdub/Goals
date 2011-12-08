@@ -106,9 +106,6 @@
         [pickerView setDate:comparisonEndDate];
     }
     
-    //pickerView = [[UIPickerView alloc] initWithFrame:pickerFrame];
-    
-    //[pickerView 
     pickerView.datePickerMode = UIDatePickerModeDate;
     [pickerSheet addSubview:pickerView];
     
