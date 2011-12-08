@@ -98,7 +98,7 @@
         NSTimeInterval month = day * 32;
         //NSTimeInterval year = day * 365;
         
-        
+        /*
         //Active 1
         goal1 = [Goal createWithName:@"Daily Active 1 Point"        timeFrame:[TimeFrame findByName:@"Daily"]       pointValue:1 active:YES createdDate:baseTestDate];
         goal2 = [Goal createWithName:@"Weekly Active 1 Point"       timeFrame:[TimeFrame findByName:@"Weekly"]      pointValue:1 active:YES createdDate:baseTestDate];
@@ -148,7 +148,7 @@
         [Goal createWithName:@"Monthly Inactive 2 Point"    timeFrame:[TimeFrame findByName:@"Monthly"]     pointValue:2 active:NO ];
         [Goal createWithName:@"Quarterly Inactive 2 Point"  timeFrame:[TimeFrame findByName:@"Quarterly"]   pointValue:2 active:NO ];
         [Goal createWithName:@"Annually Inactive 2 Point"   timeFrame:[TimeFrame findByName:@"Annually"]    pointValue:2 active:NO ];
-
+         */
     }
 }
 

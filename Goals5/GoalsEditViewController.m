@@ -19,6 +19,7 @@
 @synthesize timeFrameTextField;
 @synthesize pickerSheet;
 @synthesize pickerView;
+@synthesize goalDetails;
 @synthesize pointValueLabel;
 
 @synthesize delegate;
@@ -61,6 +62,7 @@
     [self setFrequencyTextField:nil];
     [self setNameTextField:nil];
     [self setTimeFrameTextField:nil];
+    [self setGoalDetails:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -149,10 +151,11 @@
         Goal * goal = [Goal createWithName:nameTextField.text 
               timeFrame:[timeFrames objectAtIndex:selected] 
               pointValue:[pointValueLabel.text intValue]  
-              active:YES];
+              active:YES
+              groups:[NSSet setWithArray:groups] 
+              description:goalDetails.text];
         
-        if(groups != nil)
-            [goal addGroups:[NSSet setWithArray:groups]];
+        NSLog(@"%d", [goal.groups count]);
         
         [[self delegate] didCreateGoal]; // notify parent that a new goal was created
         

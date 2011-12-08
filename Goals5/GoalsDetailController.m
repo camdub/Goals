@@ -51,12 +51,14 @@
     goalName.text = goal.name;
     pointValue.text = [NSString stringWithFormat:@"%d", [goal.pointValue intValue]];
     frequency.text = [(TimeFrame *)goal.timeFrame name];
+    goalDetails.text = goal.details;
     
     // Create string of the groups
     NSString * result = @"";
     for(Group * group in goal.groups) {
         
-        [result stringByAppendingFormat:@"@, ", group.name];
+        if(group.name != @"All")
+            result = [result stringByAppendingString:[NSString stringWithFormat:@"%@, ", group.name]];
     }
     groups.text = result;
     

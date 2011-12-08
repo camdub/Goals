@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *timeFrameTextField;
 @property (nonatomic, retain) UIActionSheet *pickerSheet;
 @property (nonatomic, retain) UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UITextField *goalDetails;
 
 @property (nonatomic, assign) id <GoalCreationDelegate> delegate;
 
