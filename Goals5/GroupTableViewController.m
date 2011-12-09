@@ -107,12 +107,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    // Testing
-    for (Group * group in selected) {
-        NSLog(@"Selected group name: %@", group.name);
-    }
-    
     [[self delegate] setSelectedGroups:self.selected];
 }
 

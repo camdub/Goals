@@ -19,7 +19,7 @@
 @synthesize timeFrameTextField;
 @synthesize pickerSheet;
 @synthesize pickerView;
-@synthesize goalDetails;
+@synthesize descriptionTextArea;
 @synthesize pointValueLabel;
 
 @synthesize editGoal;
@@ -56,7 +56,7 @@
         
         nameTextField.text = editGoal.name;
         pointValueLabel.text = [NSString stringWithFormat:@"%d", [editGoal.pointValue intValue]];
-        goalDetails.text = editGoal.details;
+        descriptionTextArea.text = editGoal.details;
         frequencyTextField.text = [(TimeFrame * )editGoal.timeFrame name];
         
         // Set this goals groups
@@ -75,7 +75,7 @@
     [self setFrequencyTextField:nil];
     [self setNameTextField:nil];
     [self setTimeFrameTextField:nil];
-    [self setGoalDetails:nil];
+    [self setDescriptionTextArea:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -171,7 +171,7 @@
                   pointValue:[pointValueLabel.text intValue]  
                   active:YES
                   groups:[NSSet setWithArray:groups] 
-                  description:goalDetails.text];
+                  description:descriptionTextArea.text];
             
             //[[self delegate] didCreateGoal]; // notify parent that a new goal was created
         } else { // THIS GOAL IS BEING EDITED
@@ -180,7 +180,7 @@
             editGoal.timeFrame = [timeFrames objectAtIndex:selected];
             editGoal.pointValue = [NSNumber numberWithInteger:[pointValueLabel.text intValue]];
             editGoal.groups = [NSSet setWithArray:groups];
-            editGoal.details = goalDetails.text;
+            editGoal.details = descriptionTextArea.text;
             
             [editGoal save];
             
@@ -197,13 +197,11 @@
                               cancelButtonTitle:@"Fix it" 
                               otherButtonTitles:nil];
         [alert show];
-        NSLog(@"Must enter a name");
     }
 }
 
 - (IBAction)cancel:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
-    NSLog(@"CANCEL");
 }
 - (IBAction)pointValueChanged:(id)sender {
     pointValueLabel.text = [NSString stringWithFormat:@"%d",(int)pointValueStepper.value];
@@ -262,10 +260,6 @@
      }
      
      - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-#if DEBUG_MODE
-         //NSLog(@"barnyard: %@", barnyard);
-         //NSLog(@"animalTypes: %@", [barnyard animalTypes]);
-#endif
          return [timeFrames count];
      }
      
@@ -281,20 +275,11 @@
      }
 
      - (void)dismissPickerSheet:(id)sender {
-         /*if (currentAnimal != nil) {
-             currentAnimal.type = [pickerView selectedRowInComponent:TYPE_COMPONENT];
-             typeField.text = [barnyard displayNameForType:currentAnimal.type];
-             imageView.image = [UIImage imageNamed:[barnyard imageFilenameForType:currentAnimal.type]];
-         }
-          */
-         //frequencyTextField.text = [pickerView selectedRowInComponent:0];
          [pickerSheet dismissWithClickedButtonIndex:0 animated:YES];
      }
       
      - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {  
-         NSLog(@"In the Text Should Begin Editing");
          if (textField == frequencyTextField) {
-             // Display the picker sheet instead of the keyboard for animal type
              [self displayPickerSheet];   
              return NO;
          }

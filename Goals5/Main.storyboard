@@ -770,15 +770,20 @@
                                             <rect key="frame" x="10" y="1" width="300" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Description" minimumFontSize="14" id="gve-JJ-fvr">
-                                                    <rect key="frame" x="20" y="10" width="260" height="102"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jUF-g7-jZ4">
+                                                    <rect key="frame" x="9" y="30" width="282" height="92"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Description" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="jWp-Lo-Eof">
+                                                    <rect key="frame" x="19" y="1" width="72" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                                    <connections>
-                                                        <action selector="textFieldDoneEditing:" destination="5KV-VH-x3k" eventType="editingDidEndOnExit" id="W9c-bc-KMg"/>
-                                                    </connections>
-                                                </textField>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -896,8 +901,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="descriptionTextArea" destination="jUF-g7-jZ4" id="zP1-Eq-cjF"/>
                         <outlet property="frequencyTextField" destination="SUm-56-RpM" id="tzK-ii-yH6"/>
-                        <outlet property="goalDetails" destination="gve-JJ-fvr" id="0gi-YC-UfQ"/>
                         <outlet property="nameTextField" destination="VOh-PS-ZmT" id="q7A-23-N0T"/>
                         <outlet property="pointValueLabel" destination="rMK-Gb-LNS" id="anA-BX-Jdy"/>
                         <outlet property="pointValueStepper" destination="6rf-jN-SnB" id="kN5-8r-VXQ"/>
@@ -1118,8 +1123,8 @@
                 <relationship kind="action" name="cancel:"/>
                 <relationship kind="action" name="done:"/>
                 <relationship kind="action" name="textFieldDoneEditing:"/>
+                <relationship kind="outlet" name="descriptionTextArea" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="frequencyTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="goalDetails" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="pointValueLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pointValueStepper" candidateClass="UIStepper"/>
